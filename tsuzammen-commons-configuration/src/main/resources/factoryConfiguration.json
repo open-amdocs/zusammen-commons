@@ -1,0 +1,3 @@
+{
+  "org.amdocs.tsuzammen.commons.configuration.ConfigurationManagerFactory": "org.amdocs.tsuzammen.commons.configuration.impl.ConfigurationManagerFactoryImpl"
+}

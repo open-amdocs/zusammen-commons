@@ -1,0 +1,3 @@
+{
+  "org.amdocs.tsuzammen.commons.db.api.cassandra.CassandraConnectorFactory": "org.amdocs.tsuzammen.commons.db.impl.cassandra.CassandraConnectorFactoryImpl"
+}
