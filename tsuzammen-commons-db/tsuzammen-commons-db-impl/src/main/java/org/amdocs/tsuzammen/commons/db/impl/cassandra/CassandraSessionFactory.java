@@ -23,24 +23,23 @@ import java.util.Optional;
 
 import static java.util.concurrent.TimeUnit.SECONDS;
 
-/**
- * Created by shalomb on 4/4/2016.
- */
 class CassandraSessionFactory {
   private static final long SHUTDOWN_TIMEOUT = 10;
-  private static final String KEYSPACE_PREFIX = CassandraConfig.getKeyspace() + "_";
+  private static final String DEFAULT_KEYSPACE = CassandraConfig.getKeyspace();
+  private static final String TENANT_KEYSPACE_PREFIX = DEFAULT_KEYSPACE + "_";
 
   private static Cluster cluster = initCluster();
   private static Map<String, Session> sessionByKeyspace = new HashMap<>();
 
-  static Session getSession(String keyspace) {
+  static Session getSession(String tenant) {
+    String keyspace = tenant == null ? DEFAULT_KEYSPACE : TENANT_KEYSPACE_PREFIX + tenant;
     Session session = sessionByKeyspace.get(keyspace);
     return session == null ? initSession(keyspace) : session;
   }
 
-  private static Session initSession(String keyspaceSuffix) {
-    Session session = cluster.connect(KEYSPACE_PREFIX + keyspaceSuffix);
-    sessionByKeyspace.put(keyspaceSuffix, session);
+  private static Session initSession(String keyspace) {
+    Session session = cluster.connect(keyspace);
+    sessionByKeyspace.put(keyspace, session);
     return session;
   }
 

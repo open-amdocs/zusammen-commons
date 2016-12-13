@@ -1,10 +1,8 @@
 package org.amdocs.tsuzammen.commons.datatypes;
 
-import java.util.Optional;
-
 public class SessionContext {
   private UserInfo user;
-  private Optional<String> tenant = Optional.empty();
+  private String tenant;
 
   public UserInfo getUser() {
     return user;
@@ -14,11 +12,11 @@ public class SessionContext {
     this.user = user;
   }
 
-  public Optional<String> getTenant() {
+  public String getTenant() {
     return tenant;
   }
 
-  public void setTenant(Optional<String> tenant) {
+  public void setTenant(String tenant) {
     this.tenant = tenant;
   }
 }

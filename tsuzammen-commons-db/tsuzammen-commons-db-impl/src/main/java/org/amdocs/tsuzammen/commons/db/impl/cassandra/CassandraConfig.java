@@ -5,9 +5,6 @@ import org.amdocs.tsuzammen.commons.configuration.impl.ConfigurationAccessor;
 import java.util.List;
 import java.util.Optional;
 
-/**
- * Created by TALIG on 12/6/2016.
- */
 class CassandraConfig {
 
   private static final String NODES = "cassandra.nodes";
@@ -17,8 +14,8 @@ class CassandraConfig {
   private static final String AUTHENTICATE = "cassandra.authenticate";
   private static final String SSL = "cassandra.ssl";
   private static final String SSL_PORT = "cassandra.ssl.port";
-  private static final String TRUST_STORE = "cassandra.trustStore";
-  private static final String TRUST_STORE_PASSWORD = "cassandra.trustStore.password";
+  private static final String TRUST_STORE = "cassandra.truststore";
+  private static final String TRUST_STORE_PASSWORD = "cassandra.truststore.password";
 
   static String[] getNodes() {
     List<String> nodes = ConfigurationAccessor.getProperty(NODES);
