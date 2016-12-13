@@ -1,17 +1,16 @@
 package org.amdocs.tsuzammen.commons.datatypes.workspace;
 
-import org.amdocs.tsuzammen.commons.datatypes.Id;
 import org.amdocs.tsuzammen.commons.datatypes.item.Info;
 
 public class WorkspaceInfo {
-  private Id id;
+  private String id;
   private Info info;
 
-  public Id getId() {
+  public String getId() {
     return id;
   }
 
-  public void setId(Id id) {
+  public void setId(String id) {
     this.id = id;
   }
 

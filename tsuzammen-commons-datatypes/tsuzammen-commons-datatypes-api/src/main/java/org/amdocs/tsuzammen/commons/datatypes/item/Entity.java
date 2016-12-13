@@ -1,7 +1,5 @@
 package org.amdocs.tsuzammen.commons.datatypes.item;
 
-import org.amdocs.tsuzammen.commons.datatypes.Id;
-
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -10,7 +8,7 @@ import java.util.Map;
  * Created by TALIG on 11/28/2016.
  */
 public class Entity {
-  private Id oid;
+  private String oid;
   private Info info;
   private Object data;
   private Object visualization;
@@ -18,11 +16,11 @@ public class Entity {
 
   private Map<String, Content> contents = new HashMap<>();
 
-  public Id getOid() {
+  public String getOid() {
     return oid;
   }
 
-  public void setOid(Id oid) {
+  public void setOid(String oid) {
     this.oid = oid;
   }
 

@@ -5,35 +5,31 @@ package org.amdocs.tsuzammen.commons.datatypes;
  */
 public class ItemVersionKey {
 
-  private Id itemId;
-  private Id versionId;
+  private String itemId;
+  private String versionId;
 
   public ItemVersionKey() {
   }
 
-  public ItemVersionKey(Id itemId, Id versionId) {
+
+  public ItemVersionKey(String itemId, String versionId) {
     this.itemId = itemId;
     this.versionId = versionId;
   }
 
-  public ItemVersionKey(String itemId, String versionId) {
-    this.itemId = new Id(itemId);
-    this.versionId = new Id(versionId);
-  }
-
-  public Id getItemId() {
+  public String getItemId() {
     return itemId;
   }
 
-  public void setItemId(Id itemId) {
+  public void setItemId(String itemId) {
     this.itemId = itemId;
   }
 
-  public Id getVersionId() {
+  public String getVersionId() {
     return versionId;
   }
 
-  public void setVersionId(Id versionId) {
+  public void setVersionId(String versionId) {
     this.versionId = versionId;
   }
 
