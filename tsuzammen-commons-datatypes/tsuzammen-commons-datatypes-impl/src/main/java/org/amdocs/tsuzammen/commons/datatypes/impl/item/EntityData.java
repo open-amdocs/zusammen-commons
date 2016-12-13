@@ -2,6 +2,9 @@ package org.amdocs.tsuzammen.commons.datatypes.impl.item;
 
 import org.amdocs.tsuzammen.commons.datatypes.item.Format;
 import org.amdocs.tsuzammen.commons.datatypes.item.Info;
+import org.amdocs.tsuzammen.commons.datatypes.item.RelationInfo;
+
+import java.util.List;
 
 /**
  * Created by TALIG on 12/1/2016.
@@ -11,6 +14,7 @@ public class EntityData {
   private Object data;
   private Format dataFormat;
   private Object visualization;
+  private List<RelationInfo> relations;
 
   public Info getInfo() {
     return info;
@@ -42,5 +46,14 @@ public class EntityData {
 
   public void setVisualization(Object visualization) {
     this.visualization = visualization;
+  }
+
+  public List<RelationInfo> getRelations() {
+    return relations;
+  }
+
+  public void setRelations(
+      List<RelationInfo> relations) {
+    this.relations = relations;
   }
 }
