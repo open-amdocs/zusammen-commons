@@ -4,24 +4,20 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-/**
- * Created by TALIG on 11/28/2016.
- */
 public class Entity {
-  private String oid;
+  private String id;
   private Info info;
+  private List<Relation> relations;
   private Object data;
   private Object visualization;
-  private List<RelationInfo> relations;
-
   private Map<String, Content> contents = new HashMap<>();
 
-  public String getOid() {
-    return oid;
+  public String getId() {
+    return id;
   }
 
-  public void setOid(String oid) {
-    this.oid = oid;
+  public void setId(String id) {
+    this.id = id;
   }
 
   public Info getInfo() {
@@ -30,6 +26,15 @@ public class Entity {
 
   public void setInfo(Info info) {
     this.info = info;
+  }
+
+  public List<Relation> getRelations() {
+    return relations;
+  }
+
+  public void setRelations(
+      List<Relation> relations) {
+    this.relations = relations;
   }
 
   public Object getData() {
@@ -55,14 +60,5 @@ public class Entity {
   public void setContents(
       Map<String, Content> contents) {
     this.contents = contents;
-  }
-
-  public List<RelationInfo> getRelations() {
-    return relations;
-  }
-
-  public void setRelations(
-      List<RelationInfo> relations) {
-    this.relations = relations;
   }
 }

@@ -1,13 +1,13 @@
-package org.amdocs.tsuzammen.commons.datatypes.item;
+package org.amdocs.tsuzammen.commons.datatypes.impl.item;
 
-import java.util.HashMap;
+import org.amdocs.tsuzammen.commons.datatypes.item.Info;
+import org.amdocs.tsuzammen.commons.datatypes.item.Relation;
+
 import java.util.List;
-import java.util.Map;
 
-public class ItemVersion {
+public class EntityInfo {
   private Info info;
   private List<Relation> relations;
-  private Map<String, Content> contents = new HashMap<>();
 
   public Info getInfo() {
     return info;
@@ -17,6 +17,7 @@ public class ItemVersion {
     this.info = info;
   }
 
+
   public List<Relation> getRelations() {
     return relations;
   }
@@ -24,14 +25,5 @@ public class ItemVersion {
   public void setRelations(
       List<Relation> relations) {
     this.relations = relations;
-  }
-
-  public Map<String, Content> getContents() {
-    return contents;
-  }
-
-  public void setContents(
-      Map<String, Content> contents) {
-    this.contents = contents;
   }
 }

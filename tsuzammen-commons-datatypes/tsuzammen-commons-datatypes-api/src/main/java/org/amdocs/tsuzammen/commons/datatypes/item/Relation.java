@@ -1,17 +1,21 @@
 package org.amdocs.tsuzammen.commons.datatypes.item;
 
-import org.amdocs.tsuzammen.commons.datatypes.ItemVersionKey;
-
 import java.util.Map;
 
-/**
- * Created by TALIG on 11/27/2016.
- */
-public class RelationInfo {
+public class Relation {
+  private String id;
   private String type;
   private Map<String, String> tags;
-  private ItemVersionKey source;
-  private ItemVersionKey target;
+  private RelationEdge source;
+  private RelationEdge target;
+
+  public String getId() {
+    return id;
+  }
+
+  public void setId(String id) {
+    this.id = id;
+  }
 
   public String getType() {
     return type;
@@ -29,19 +33,19 @@ public class RelationInfo {
     this.tags = tags;
   }
 
-  public ItemVersionKey getSource() {
+  public RelationEdge getSource() {
     return source;
   }
 
-  public void setSource(ItemVersionKey source) {
+  public void setSource(RelationEdge source) {
     this.source = source;
   }
 
-  public ItemVersionKey getTarget() {
+  public RelationEdge getTarget() {
     return target;
   }
 
-  public void setTarget(ItemVersionKey target) {
+  public void setTarget(RelationEdge target) {
     this.target = target;
   }
 }
