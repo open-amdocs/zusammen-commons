@@ -5,7 +5,7 @@ import java.lang.reflect.Array;
 import java.net.URL;
 import java.util.*;
 
-import org.apache.commons.codec.binary.Base64;
+
 
 /**
  * This class provides auxiliary static methods.
@@ -68,27 +68,7 @@ public class CommonMethods {
   } // deserializeObject
 
 
-  /**
-   * Encodes binary byte stream to ASCII format.
-   *
-   * @param binary An Java array of bytes in binary format.
-   * @return An Java array of bytes encoded in ASCII format.
-   * @see #decode(byte[])
-   */
-  public static byte[] encode(byte[] binary) {
-    return Base64.encodeBase64(binary);
-  }
 
-  /**
-   * Decodes ASCII byte stream into binary format.
-   *
-   * @param ascii An Java array of bytes in ASCII format.
-   * @return An Java array of bytes encoded in binary format.
-   * @see #encode(byte[])
-   */
-  public static byte[] decode(byte[] ascii) {
-    return Base64.decodeBase64(ascii);
-  }
 
   /**
    * Checks whether the given <tt>Object</tt> is empty.
