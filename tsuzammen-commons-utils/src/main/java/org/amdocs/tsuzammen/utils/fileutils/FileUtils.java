@@ -2,7 +2,6 @@ package org.amdocs.tsuzammen.utils.fileutils;
 
 
 import org.amdocs.tsuzammen.utils.fileutils.json.JsonUtil;
-import org.amdocs.tsuzammen.utils.fileutils.yaml.YamlUtil;
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
@@ -18,9 +17,6 @@ import java.util.List;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipInputStream;
 
-/**
- * Created by shalomb on 4/5/2016.
- */
 public class FileUtils {
 
   public static InputStream getFileInputStream(String fileName) {
@@ -73,7 +69,7 @@ public class FileUtils {
       this.displayName = displayName;
     }
   }
-
+/*
 
   public static byte[] convertToBytes(Object object, FileExtension extension) {
     if (object != null) {
@@ -102,7 +98,7 @@ public class FileUtils {
     } else {
       return null;
     }
-  }
+  }*/
 
 
     /*public static String loadFileToString(String fileName) {
@@ -207,13 +203,15 @@ public class FileUtils {
     return mapFileContent;
   }
 
-  public static List<File> getFiles(String path){
+  public static List<File> getFiles(String path) {
     File file = new File(path);
-    if(!file.exists()) throw new RuntimeException("file["+file.getAbsolutePath()+"] does not " +
-        "exist");
+    if (!file.exists()) {
+      throw new RuntimeException("file[" + file.getAbsolutePath() + "] does not " +
+          "exist");
+    }
     List<File> fileList = new ArrayList<>();
 
-    getFiles(file,fileList);
+    getFiles(file, fileList);
 
     return fileList;
   }
@@ -225,11 +223,12 @@ public class FileUtils {
         for (File subFile : files) {
           getFiles(subFile, fileList);
         }
-      }else {
+      } else {
         fileList.add(file);
       }
     }
   }
+
   /**
    * Deletes a given file. If the file is a directory, then all contained
    * files are recursively deleted.
