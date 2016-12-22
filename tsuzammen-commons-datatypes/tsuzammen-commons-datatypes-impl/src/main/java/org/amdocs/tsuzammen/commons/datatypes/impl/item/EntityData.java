@@ -52,6 +52,10 @@ public class EntityData {
     this.data = FileUtils.toByteArray(data);
   }
 
+  public void setData(byte[] data) {
+    this.data = data;
+  }
+
   public Format getDataFormat() {
     return dataFormat;
   }
@@ -68,6 +72,10 @@ public class EntityData {
 
   public void setVisualization(InputStream visualization) {
     this.visualization = FileUtils.toByteArray(visualization);
+  }
+
+  public void setVisualization(byte[] visualization) {
+    this.visualization = visualization;
   }
 
   public List<Relation> getRelations() {
