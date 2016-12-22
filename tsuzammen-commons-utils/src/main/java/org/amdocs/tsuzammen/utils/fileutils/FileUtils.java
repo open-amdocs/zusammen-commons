@@ -6,6 +6,7 @@ import org.amdocs.tsuzammen.utils.fileutils.json.JsonUtil;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
@@ -269,9 +270,24 @@ public class FileUtils {
       FileOutputStream fos = new FileOutputStream(file);
       fos.write(fileByte.getBytes());
     } catch (IOException e) {
-      e.printStackTrace();
+      throw new RuntimeException(e);
     }
     return file;
+  }
+
+  public static File writeFileFromInputStream(String path, String fileName, InputStream fileData){
+    OutputStream fileDataOut = null;
+    File file = new File(path+File.separator+fileName);
+    try {
+      fileDataOut = new FileOutputStream(file);
+      copy(fileData,fileDataOut);
+
+    } catch (IOException e) {
+      throw new RuntimeException(e);
+    }
+
+    return file;
+
   }
 
   public static boolean exists(String path) {

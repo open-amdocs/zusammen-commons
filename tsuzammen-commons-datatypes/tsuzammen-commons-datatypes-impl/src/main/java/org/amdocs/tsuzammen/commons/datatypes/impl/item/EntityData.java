@@ -28,7 +28,6 @@ import java.util.List;
 public class EntityData<T extends Entity> {
   private Class<T> implClass;
   private String id;
-  private String parentId;
   private Collection<String> contents;
   private Info info;
   private List<Relation> relations;
@@ -38,7 +37,6 @@ public class EntityData<T extends Entity> {
   public EntityData(CoreEntity<T> entity) {
     setImplClass(entity.getImplClass());
     setId(entity.getId());
-    setParentId(entity.getParentId());
     setInfo(entity.getInfo());
     setRelations(entity.getRelations());
     setData(entity.getData());
@@ -59,14 +57,6 @@ public class EntityData<T extends Entity> {
 
   public void setId(String id) {
     this.id = id;
-  }
-
-  public String getParentId() {
-    return parentId;
-  }
-
-  public void setParentId(String parentId) {
-    this.parentId = parentId;
   }
 
   public Collection<String> getContents() {
