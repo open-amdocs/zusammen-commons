@@ -19,24 +19,38 @@ package org.amdocs.tsuzammen.commons.datatypes.impl.item;
 import org.amdocs.tsuzammen.commons.datatypes.item.Entity;
 import org.amdocs.tsuzammen.commons.datatypes.item.Info;
 import org.amdocs.tsuzammen.commons.datatypes.item.Relation;
+import org.amdocs.tsuzammen.utils.common.CommonMethods;
 import org.amdocs.tsuzammen.utils.fileutils.FileUtils;
 
 import java.io.InputStream;
 import java.util.Collection;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
-public class EntityData<T extends Entity> {
+public class CoreEntity<T extends Entity> implements Entity {
   private Class<T> implClass;
   private String id;
   private String parentId;
-  private Collection<String> contents;
   private Info info;
   private List<Relation> relations;
   private byte[] data;
   private byte[] visualization;
+  private Map<String, Collection<Entity>> contents = new HashMap<>();
 
-  public EntityData(CoreEntity<T> entity) {
-    setImplClass(entity.getImplClass());
+  public CoreEntity(T entity, Class<T> entityClass) {
+    implClass = entityClass;
+    setId(entity.getId());
+    setParentId(entity.getParentId());
+    setInfo(entity.getInfo());
+    setRelations(entity.getRelations());
+    setData(entity.getData());
+    setVisualization(entity.getVisualization());
+    setContents(entity.getContents());
+  }
+
+  public CoreEntity(EntityData<T> entity) {
+    implClass = entity.getImplClass();
     setId(entity.getId());
     setParentId(entity.getParentId());
     setInfo(entity.getInfo());
@@ -45,59 +59,78 @@ public class EntityData<T extends Entity> {
     setVisualization(entity.getVisualization());
   }
 
+  public T getEntity() {
+    T entity = CommonMethods.newInstance(implClass);
+    entity.setId(getId());
+    entity.setParentId(getParentId());
+    entity.setInfo(getInfo());
+    entity.setRelations(getRelations());
+    entity.setData(getData());
+    entity.setVisualization(getVisualization());
+    entity.setContents(getContents());
+    return entity;
+  }
+
   public Class<T> getImplClass() {
     return implClass;
   }
 
-  public void setImplClass(Class<T> implClass) {
-    this.implClass = implClass;
-  }
-
+  @Override
   public String getId() {
     return id;
   }
 
+  @Override
   public void setId(String id) {
     this.id = id;
   }
 
+  @Override
   public String getParentId() {
     return parentId;
   }
 
+  @Override
   public void setParentId(String parentId) {
     this.parentId = parentId;
   }
 
-  public Collection<String> getContents() {
+  @Override
+  public Map<String, Collection<Entity>> getContents() {
     return contents;
   }
 
-  public void setContents(Collection<String> contents) {
+  @Override
+  public void setContents(Map<String, Collection<Entity>> contents) {
     this.contents = contents;
   }
 
+  @Override
   public Info getInfo() {
     return info;
   }
 
+  @Override
   public void setInfo(Info info) {
     this.info = info;
   }
 
+  @Override
   public List<Relation> getRelations() {
     return relations;
   }
 
-  public void setRelations(
-      List<Relation> relations) {
+  @Override
+  public void setRelations(List<Relation> relations) {
     this.relations = relations;
   }
 
+  @Override
   public InputStream getData() {
     return FileUtils.toInputStream(data);
   }
 
+  @Override
   public void setData(InputStream data) {
     this.data = FileUtils.toByteArray(data);
   }
@@ -110,7 +143,4 @@ public class EntityData<T extends Entity> {
     this.visualization = FileUtils.toByteArray(visualization);
   }
 
-  public CoreEntity<T> getEntity() {
-    return new CoreEntity<>(this);
-  }
 }

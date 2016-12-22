@@ -147,6 +147,14 @@ public class FileUtils {
     return output.toByteArray();
   }
 
+  public static InputStream toInputStream(byte[] bytes) {
+    if (bytes == null) {
+      return new ByteArrayInputStream(new byte[]{});
+    }
+    ByteArrayInputStream is = new ByteArrayInputStream(bytes);
+    return is;
+  }
+
   public static int copy(InputStream input, OutputStream output) throws IOException {
     long count = copyLarge(input, output);
     return count > 2147483647L ? -1 : (int) count;

@@ -1,64 +1,52 @@
+/*
+ * Copyright © 2016 Amdocs Software Systems Limited
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
 package org.amdocs.tsuzammen.commons.datatypes.item;
 
-import java.util.HashMap;
+import java.io.InputStream;
+import java.util.Collection;
 import java.util.List;
 import java.util.Map;
 
-public class Entity {
-  private String id;
-  private Info info;
-  private List<Relation> relations;
-  private Object data;
-  private Object visualization;
-  private Map<String, Content> contents = new HashMap<>();
+public interface Entity {
+  String getId();
 
-  public String getId() {
-    return id;
-  }
+  void setId(String id);
 
-  public void setId(String id) {
-    this.id = id;
-  }
+  String getParentId();
 
-  public Info getInfo() {
-    return info;
-  }
+  void setParentId(String parentId);
 
-  public void setInfo(Info info) {
-    this.info = info;
-  }
+  Map<String, Collection<Entity>> getContents();
 
-  public List<Relation> getRelations() {
-    return relations;
-  }
+  void setContents(Map<String, Collection<Entity>> contents);
 
-  public void setRelations(
-      List<Relation> relations) {
-    this.relations = relations;
-  }
+  Info getInfo();
 
-  public Object getData() {
-    return data;
-  }
+  void setInfo(Info info);
 
-  public void setData(Object data) {
-    this.data = data;
-  }
+  List<Relation> getRelations();
 
-  public Object getVisualization() {
-    return visualization;
-  }
+  void setRelations(List<Relation> relations);
 
-  public void setVisualization(Object visualization) {
-    this.visualization = visualization;
-  }
+  InputStream getData();
 
-  public Map<String, Content> getContents() {
-    return contents;
-  }
+  void setData(InputStream data);
 
-  public void setContents(
-      Map<String, Content> contents) {
-    this.contents = contents;
-  }
+  InputStream getVisualization();
+
+  void setVisualization(InputStream visualization);
 }

@@ -1,38 +1,29 @@
 package org.amdocs.tsuzammen.commons.datatypes.item;
 
-import org.amdocs.tsuzammen.commons.datatypes.LocalizedValue;
-
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
-/**
- * Created by TALIG on 11/28/2016.
- */
 public class Info {
-  //private List<LocalizedValue> name;
-  //private List<LocalizedValue> description;
+  private String name;
+  private String description;
   private Map<String, Object> properties = new HashMap<>();
 
-  public Info(){}
-
-  /*public List<LocalizedValue> getName() {
+  public String getName() {
     return name;
   }
 
-  public void setName(List<LocalizedValue> name) {
+  public void setName(String name) {
     this.name = name;
   }
 
-  public List<LocalizedValue> getDescription() {
+  public String getDescription() {
     return description;
   }
 
-  public void setDescription(
-      List<LocalizedValue> description) {
+  public void setDescription(String description) {
     this.description = description;
   }
-*/
+
   public Map<String, Object> getProperties() {
     return properties;
   }
