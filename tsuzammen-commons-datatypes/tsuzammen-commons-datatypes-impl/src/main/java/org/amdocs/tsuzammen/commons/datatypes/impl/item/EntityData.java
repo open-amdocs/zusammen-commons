@@ -19,14 +19,19 @@ package org.amdocs.tsuzammen.commons.datatypes.impl.item;
 import org.amdocs.tsuzammen.commons.datatypes.item.Format;
 import org.amdocs.tsuzammen.commons.datatypes.item.Info;
 import org.amdocs.tsuzammen.commons.datatypes.item.Relation;
+import org.amdocs.tsuzammen.utils.fileutils.FileUtils;
 
+
+import java.io.ByteArrayInputStream;
+import java.io.InputStream;
+import java.nio.ByteBuffer;
 import java.util.List;
 
 public class EntityData {
   private Info info;
-  private Object data;
+  private byte[] data;
   private Format dataFormat;
-  private Object visualization;
+  private byte[] visualization;
   private List<Relation> relations;
 
   public Info getInfo() {
@@ -37,12 +42,14 @@ public class EntityData {
     this.info = info;
   }
 
-  public Object getData() {
-    return data;
+  public InputStream getData() {
+    if(this.data==null) return new ByteArrayInputStream(new byte[]{});
+    ByteArrayInputStream is = new ByteArrayInputStream(this.data);
+    return is;
   }
 
-  public void setData(Object data) {
-    this.data = data;
+  public void setData(InputStream data) {
+    this.data = FileUtils.toByteArray(data);
   }
 
   public Format getDataFormat() {
@@ -53,12 +60,14 @@ public class EntityData {
     this.dataFormat = dataFormat;
   }
 
-  public Object getVisualization() {
-    return visualization;
+  public InputStream getVisualization() {
+    if(this.visualization==null) return new ByteArrayInputStream(new byte[]{});
+    ByteArrayInputStream is = new ByteArrayInputStream(this.visualization);
+    return is;
   }
 
-  public void setVisualization(Object visualization) {
-    this.visualization = visualization;
+  public void setVisualization(InputStream visualization) {
+    this.visualization = FileUtils.toByteArray(visualization);
   }
 
   public List<Relation> getRelations() {
