@@ -26,4 +26,6 @@ public interface Element {
   Info getInfo();
 
   void setInfo(Info info);
+
+  boolean isContent();
 }

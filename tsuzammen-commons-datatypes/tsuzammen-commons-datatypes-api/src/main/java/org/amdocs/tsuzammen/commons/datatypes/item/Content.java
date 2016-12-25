@@ -31,6 +31,11 @@ public class Content implements Element {
     this.info = info;
   }
 
+  @Override
+  public boolean isContent() {
+    return true;
+  }
+
   public Collection<? extends Entity> getEntities() {
     return entities;
   }

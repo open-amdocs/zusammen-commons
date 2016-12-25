@@ -46,4 +46,6 @@ public interface Entity extends Element {
   InputStream getVisualization();
 
   void setVisualization(InputStream visualization);
+
+  default boolean isContent(){return false;}
 }
