@@ -16,121 +16,64 @@
 
 package org.amdocs.tsuzammen.commons.datatypes.impl.item;
 
+import org.amdocs.tsuzammen.commons.datatypes.item.Content;
 import org.amdocs.tsuzammen.commons.datatypes.item.Entity;
-import org.amdocs.tsuzammen.commons.datatypes.item.Info;
-import org.amdocs.tsuzammen.commons.datatypes.item.Relation;
 import org.amdocs.tsuzammen.utils.common.CommonMethods;
-import org.amdocs.tsuzammen.utils.fileutils.FileUtils;
 
-import java.io.InputStream;
-import java.util.Collection;
-import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
+public class CoreEntity<T extends Entity> extends EntityData implements Entity {
+  private Map<String, Content> contents;
 
-public class CoreEntity<T extends Entity> implements Entity {
-  private Class<T> implClass;
-  private String id;
-  private Info info;
-  private List<Relation> relations;
-  private byte[] data;
-  private byte[] visualization;
-  private Map<String, Collection<Entity>> contents = new HashMap<>();
-
-  public CoreEntity(){};
+  public CoreEntity() {
+  }
 
   public CoreEntity(T entity, Class<T> entityClass) {
-    implClass = entityClass;
-    setId(entity.getId());
+    setImplClass(entityClass);
+    setElementId(entity.getElementId());
     setInfo(entity.getInfo());
     setRelations(entity.getRelations());
     setData(entity.getData());
+    setSearchData(entity.getSearchData());
     setVisualization(entity.getVisualization());
     setContents(entity.getContents());
   }
 
-  public CoreEntity(EntityData<T> entity) {
-    implClass = entity.getImplClass();
-    setId(entity.getId());
+  public CoreEntity(EntityInfo entity) {
+    setElementId(entity.getElementId());
     setInfo(entity.getInfo());
     setRelations(entity.getRelations());
+    setContentIds(getContentIds());
+  }
+
+  public CoreEntity(EntityData<T> entity) {
+    this((EntityInfo) entity);
+    setImplClass(entity.getImplClass());
     setData(entity.getData());
+    setSearchData(entity.getSearchData());
     setVisualization(entity.getVisualization());
   }
 
   public T getEntity() {
-    T entity = CommonMethods.newInstance(implClass);
-    entity.setId(getId());
+    T entity = (T) CommonMethods.newInstance(getImplClass());
+    entity.setElementId(getElementId());
     entity.setInfo(getInfo());
     entity.setRelations(getRelations());
     entity.setData(getData());
+    entity.setSearchData(getSearchData());
     entity.setVisualization(getVisualization());
     entity.setContents(getContents());
     return entity;
   }
 
-  public Class<T> getImplClass() {
-    return implClass;
-  }
-
   @Override
-  public String getId() {
-    return id;
-  }
-
-  @Override
-  public void setId(String id) {
-    this.id = id;
-  }
-
-
-  @Override
-  public Map<String, Collection<Entity>> getContents() {
+  public Map<String, Content> getContents() {
     return contents;
   }
 
   @Override
-  public void setContents(Map<String, Collection<Entity>> contents) {
+  public void setContents(Map<String, Content> contents) {
     this.contents = contents;
-  }
-
-  @Override
-  public Info getInfo() {
-    return info;
-  }
-
-  @Override
-  public void setInfo(Info info) {
-    this.info = info;
-  }
-
-  @Override
-  public List<Relation> getRelations() {
-    return relations;
-  }
-
-  @Override
-  public void setRelations(List<Relation> relations) {
-    this.relations = relations;
-  }
-
-  @Override
-  public InputStream getData() {
-    return FileUtils.toInputStream(data);
-  }
-
-  @Override
-  public void setData(InputStream data) {
-    this.data = FileUtils.toByteArray(data);
-  }
-
-  public InputStream getVisualization() {
-    return FileUtils.toInputStream(visualization);
-  }
-
-  public void setVisualization(InputStream visualization) {
-    this.visualization = FileUtils.toByteArray(visualization);
   }
 
 }

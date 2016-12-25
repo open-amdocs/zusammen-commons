@@ -1,5 +1,6 @@
 package org.amdocs.tsuzammen.commons.datatypes.impl.item;
 
+import org.amdocs.tsuzammen.commons.datatypes.Id;
 import org.amdocs.tsuzammen.commons.datatypes.item.Info;
 import org.amdocs.tsuzammen.commons.datatypes.item.Relation;
 
@@ -7,40 +8,26 @@ import java.util.Collection;
 import java.util.List;
 
 public class EntityInfo {
-  private String id;
-  private String parentId;
-  private Collection<String> contents;
+  private Id elementId;
   private Info info;
   private List<Relation> relations;
+  private Collection<Id> contentIds;
+
+  public EntityInfo() {
+  }
 
   public EntityInfo(CoreEntity entity) {
-    setId(entity.getId());
+    setElementId(entity.getElementId());
     setInfo(entity.getInfo());
     setRelations(entity.getRelations());
   }
 
-  public String getId() {
-    return id;
+  public Id getElementId() {
+    return elementId;
   }
 
-  public void setId(String id) {
-    this.id = id;
-  }
-
-  public String getParentId() {
-    return parentId;
-  }
-
-  public void setParentId(String parentId) {
-    this.parentId = parentId;
-  }
-
-  public Collection<String> getContents() {
-    return contents;
-  }
-
-  public void setContents(Collection<String> contents) {
-    this.contents = contents;
+  public void setElementId(Id elementId) {
+    this.elementId = elementId;
   }
 
   public Info getInfo() {
@@ -51,7 +38,6 @@ public class EntityInfo {
     this.info = info;
   }
 
-
   public List<Relation> getRelations() {
     return relations;
   }
@@ -59,5 +45,13 @@ public class EntityInfo {
   public void setRelations(
       List<Relation> relations) {
     this.relations = relations;
+  }
+
+  public Collection<Id> getContentIds() {
+    return contentIds;
+  }
+
+  public void setContentIds(Collection<Id> contentIds) {
+    this.contentIds = contentIds;
   }
 }

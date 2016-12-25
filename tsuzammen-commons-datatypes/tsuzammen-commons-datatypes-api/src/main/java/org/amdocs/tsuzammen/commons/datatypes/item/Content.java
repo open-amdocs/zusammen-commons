@@ -1,30 +1,50 @@
 package org.amdocs.tsuzammen.commons.datatypes.item;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
+import org.amdocs.tsuzammen.commons.datatypes.Id;
+
+import java.util.Collection;
 import java.util.Map;
 
-/**
- * Created by TALIG on 11/28/2016.
- */
-public class  Content {
+public class Content implements Element {
+  private Id elementId;
+  private Info info;
+  private Collection<? extends Entity> entities;
+  private Map<String, Content> contents;
 
-  private Format dataFormat;
-  private List<Entity> entities = new ArrayList<>();
-  public Format getDataFormat() {
-    return dataFormat;
+  @Override
+  public Id getElementId() {
+    return elementId;
   }
 
-  public void setDataFormat(Format dataFormat) {
-    this.dataFormat = dataFormat;
+  @Override
+  public void setElementId(Id elementId) {
+    this.elementId = elementId;
   }
 
-  public List<Entity> getEntities() {
+  @Override
+  public Info getInfo() {
+    return info;
+  }
+
+  @Override
+  public void setInfo(Info info) {
+    this.info = info;
+  }
+
+  public Collection<? extends Entity> getEntities() {
     return entities;
   }
 
-  public void setEntities(List<Entity> entities) {
+  public void setEntities(Collection<? extends Entity> entities) {
     this.entities = entities;
   }
+
+  public Map<String, Content> getContents() {
+    return contents;
+  }
+
+  public void setContents(Map<String, Content> contents) {
+    this.contents = contents;
+  }
+
 }

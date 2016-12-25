@@ -16,34 +16,25 @@
 
 package org.amdocs.tsuzammen.commons.datatypes.item;
 
-import java.io.InputStream;
-import java.util.List;
-import java.util.Map;
+import org.amdocs.tsuzammen.commons.datatypes.Id;
 
-public interface Entity extends Element {
+public class EntityContext {
+  private Id itemId;
+  private Id versionId;
 
-  Map<String, Content> getContents();
+  public Id getItemId() {
+    return itemId;
+  }
 
-  void setContents(Map<String, Content> contents);
+  public void setItemId(Id itemId) {
+    this.itemId = itemId;
+  }
 
-/*
-  Content getContent(String contentName);
+  public Id getVersionId() {
+    return versionId;
+  }
 
-  void setContent(String contentName, Content content);*/
-
-  List<Relation> getRelations();
-
-  void setRelations(List<Relation> relations);
-
-  InputStream getData();
-
-  void setData(InputStream data);
-
-  InputStream getSearchData();
-
-  void setSearchData(InputStream searchData);
-
-  InputStream getVisualization();
-
-  void setVisualization(InputStream visualization);
+  public void setVersionId(Id versionId) {
+    this.versionId = versionId;
+  }
 }

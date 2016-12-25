@@ -17,32 +17,30 @@
 package org.amdocs.tsuzammen.commons.datatypes.impl.item;
 
 import org.amdocs.tsuzammen.commons.datatypes.item.Entity;
-import org.amdocs.tsuzammen.commons.datatypes.item.Info;
-import org.amdocs.tsuzammen.commons.datatypes.item.Relation;
 import org.amdocs.tsuzammen.utils.fileutils.FileUtils;
 
 import java.io.InputStream;
-import java.util.Collection;
-import java.util.List;
 
-public class EntityData<T extends Entity> {
+public class EntityData<T extends Entity> extends EntityInfo {
   private Class<T> implClass;
-  private String id;
-  private Collection<String> contents;
-  private Info info;
-  private List<Relation> relations;
   private byte[] data;
+  private byte[] searchData;
   private byte[] visualization;
 
-  public EntityData() {}
+  public EntityData() {
+
+  }
 
   public EntityData(CoreEntity<T> entity) {
+    super(entity);
     setImplClass(entity.getImplClass());
-    setId(entity.getId());
-    setInfo(entity.getInfo());
-    setRelations(entity.getRelations());
     setData(entity.getData());
+    setSearchData(entity.getSearchData());
     setVisualization(entity.getVisualization());
+  }
+
+  public CoreEntity<T> getCoreEntity() {
+    return new CoreEntity<>(this);
   }
 
   public Class<T> getImplClass() {
@@ -53,45 +51,20 @@ public class EntityData<T extends Entity> {
     this.implClass = implClass;
   }
 
-  public String getId() {
-    return id;
-  }
-
-  public void setId(String id) {
-    this.id = id;
-  }
-
-  public Collection<String> getContents() {
-    return contents;
-  }
-
-  public void setContents(Collection<String> contents) {
-    this.contents = contents;
-  }
-
-  public Info getInfo() {
-    return info;
-  }
-
-  public void setInfo(Info info) {
-    this.info = info;
-  }
-
-  public List<Relation> getRelations() {
-    return relations;
-  }
-
-  public void setRelations(
-      List<Relation> relations) {
-    this.relations = relations;
-  }
-
   public InputStream getData() {
     return FileUtils.toInputStream(data);
   }
 
   public void setData(InputStream data) {
     this.data = FileUtils.toByteArray(data);
+  }
+
+  public InputStream getSearchData() {
+    return FileUtils.toInputStream(searchData);
+  }
+
+  public void setSearchData(InputStream searchData) {
+    this.searchData = FileUtils.toByteArray(searchData);
   }
 
   public InputStream getVisualization() {
@@ -102,7 +75,4 @@ public class EntityData<T extends Entity> {
     this.visualization = FileUtils.toByteArray(visualization);
   }
 
-  public CoreEntity<T> getEntity() {
-    return new CoreEntity<>(this);
-  }
 }
