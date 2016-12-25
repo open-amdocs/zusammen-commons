@@ -18,7 +18,7 @@ package org.amdocs.tsuzammen.commons.datatypes.item;
 
 import org.amdocs.tsuzammen.commons.datatypes.Id;
 
-public class EntityContext {
+public class ElementContext {
   private Id itemId;
   private Id versionId;
 
