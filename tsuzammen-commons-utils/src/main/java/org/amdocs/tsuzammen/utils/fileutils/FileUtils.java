@@ -6,6 +6,7 @@ import org.amdocs.tsuzammen.utils.fileutils.json.JsonUtil;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -15,6 +16,7 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.Enumeration;
 import java.util.List;
+import java.util.Optional;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipInputStream;
 
@@ -266,13 +268,34 @@ public class FileUtils {
   public static File writeFile(String path, String fileName, Object fileData) {
     File file = new File(path + File.separator + fileName);
     String fileByte = JsonUtil.object2Json(fileData);
+    FileOutputStream fos = null;
     try {
-      FileOutputStream fos = new FileOutputStream(file);
+      fos = new FileOutputStream(file);
       fos.write(fileByte.getBytes());
+
     } catch (IOException e) {
       throw new RuntimeException(e);
+    }finally {
+      if(fos!= null)
+        try {
+          fos.close();
+        } catch (IOException e) {
+          e.printStackTrace();
+        }
     }
     return file;
+  }
+
+  public static Optional<InputStream> readFile(String path, String fileName){
+    File file = new File(path+File.separator+fileName);
+    if(!file.exists()) return Optional.empty();
+
+    try {
+      FileInputStream fis = new FileInputStream(file);
+      return Optional.of(fis);
+    } catch (FileNotFoundException e) {
+      throw new RuntimeException(e);
+    }
   }
 
   public static File writeFileFromInputStream(String path, String fileName, InputStream fileData){
@@ -284,6 +307,13 @@ public class FileUtils {
 
     } catch (IOException e) {
       throw new RuntimeException(e);
+    }finally {
+      if(fileDataOut!= null)
+        try {
+          fileDataOut.close();
+        } catch (IOException e) {
+          e.printStackTrace();
+        }
     }
 
     return file;

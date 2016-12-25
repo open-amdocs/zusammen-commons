@@ -26,10 +26,6 @@ public interface Entity {
 
   void setId(String id);
 
-  String getParentId();
-
-  void setParentId(String parentId);
-
   Map<String, Collection<Entity>> getContents();
 
   void setContents(Map<String, Collection<Entity>> contents);

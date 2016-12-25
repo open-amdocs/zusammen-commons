@@ -15,7 +15,6 @@ public class EntityInfo {
 
   public EntityInfo(CoreEntity entity) {
     setId(entity.getId());
-    setParentId(entity.getParentId());
     setInfo(entity.getInfo());
     setRelations(entity.getRelations());
   }

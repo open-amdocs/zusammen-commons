@@ -28,20 +28,21 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+
 public class CoreEntity<T extends Entity> implements Entity {
   private Class<T> implClass;
   private String id;
-  private String parentId;
   private Info info;
   private List<Relation> relations;
   private byte[] data;
   private byte[] visualization;
   private Map<String, Collection<Entity>> contents = new HashMap<>();
 
+  public CoreEntity(){};
+
   public CoreEntity(T entity, Class<T> entityClass) {
     implClass = entityClass;
     setId(entity.getId());
-    setParentId(entity.getParentId());
     setInfo(entity.getInfo());
     setRelations(entity.getRelations());
     setData(entity.getData());
@@ -52,7 +53,6 @@ public class CoreEntity<T extends Entity> implements Entity {
   public CoreEntity(EntityData<T> entity) {
     implClass = entity.getImplClass();
     setId(entity.getId());
-    setParentId(entity.getParentId());
     setInfo(entity.getInfo());
     setRelations(entity.getRelations());
     setData(entity.getData());
@@ -62,7 +62,6 @@ public class CoreEntity<T extends Entity> implements Entity {
   public T getEntity() {
     T entity = CommonMethods.newInstance(implClass);
     entity.setId(getId());
-    entity.setParentId(getParentId());
     entity.setInfo(getInfo());
     entity.setRelations(getRelations());
     entity.setData(getData());
@@ -85,15 +84,6 @@ public class CoreEntity<T extends Entity> implements Entity {
     this.id = id;
   }
 
-  @Override
-  public String getParentId() {
-    return parentId;
-  }
-
-  @Override
-  public void setParentId(String parentId) {
-    this.parentId = parentId;
-  }
 
   @Override
   public Map<String, Collection<Entity>> getContents() {

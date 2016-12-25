@@ -39,6 +39,20 @@ public class JsonUtil {
     return t;
   }
 
+  public static <T> T json2Object(InputStream is, Type typeOfT) {
+    T t;
+    try {
+      try (Reader br = new BufferedReader(new InputStreamReader(is))) {
+        t = new Gson().fromJson(br, typeOfT);
+      } catch (IOException e) {
+        throw e;
+      }
+    } catch (JsonIOException | JsonSyntaxException | IOException e) {
+      throw new RuntimeException(e);
+    }
+    return t;
+  }
+
   public static <T> T json2Object(InputStream is, Class<T> classOfT) {
     T t;
     try {

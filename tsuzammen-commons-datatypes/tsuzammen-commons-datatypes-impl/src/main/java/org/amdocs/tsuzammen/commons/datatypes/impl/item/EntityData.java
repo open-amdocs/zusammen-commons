@@ -34,6 +34,8 @@ public class EntityData<T extends Entity> {
   private byte[] data;
   private byte[] visualization;
 
+  public EntityData() {}
+
   public EntityData(CoreEntity<T> entity) {
     setImplClass(entity.getImplClass());
     setId(entity.getId());
