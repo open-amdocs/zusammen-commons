@@ -32,9 +32,25 @@ public class Content implements Element {
   }
 
   @Override
-  public boolean isContent() {
-    return true;
+  public Collection<Relation> getRelations() {
+    return null;
   }
+
+  @Override
+  public void setRelations(Collection<Relation> relations) {
+
+  }
+
+  @Override
+  public Collection<Element> getSubElements() {
+    return null;
+  }
+
+  @Override
+  public void setSubElements(Collection<Element> subElements) {
+
+  }
+
 
   public Collection<? extends Entity> getEntities() {
     return entities;

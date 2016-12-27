@@ -16,24 +16,13 @@
 
 package org.amdocs.tsuzammen.commons.datatypes.item;
 
-import org.amdocs.tsuzammen.commons.datatypes.Id;
+import java.io.InputStream;
 
-import java.util.Collection;
+public interface ElementReader {
 
-public interface Element {
-  Id getElementId();
+  InputStream getData();
 
-  void setElementId(Id elementId);
+  InputStream getSearchData();
 
-  Info getInfo();
-
-  void setInfo(Info info);
-
-  Collection<Relation> getRelations();
-
-  void setRelations(Collection<Relation> relations);
-
-  Collection<Element> getSubElements();
-
-  void setSubElements(Collection<Element> subElements);
+  InputStream getVisualization();
 }

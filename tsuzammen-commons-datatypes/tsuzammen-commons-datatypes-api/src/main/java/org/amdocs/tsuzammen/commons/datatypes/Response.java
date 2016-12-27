@@ -14,26 +14,25 @@
  * limitations under the License.
  */
 
-package org.amdocs.tsuzammen.commons.datatypes.item;
+package org.amdocs.tsuzammen.commons.datatypes;
 
-import org.amdocs.tsuzammen.commons.datatypes.Id;
+public class Response {
+  private boolean success;
+  private Error error;
 
-import java.util.Collection;
+  public boolean isSuccess() {
+    return success;
+  }
 
-public interface Element {
-  Id getElementId();
+  public void setSuccess(boolean success) {
+    this.success = success;
+  }
 
-  void setElementId(Id elementId);
+  public Error getError() {
+    return error;
+  }
 
-  Info getInfo();
-
-  void setInfo(Info info);
-
-  Collection<Relation> getRelations();
-
-  void setRelations(Collection<Relation> relations);
-
-  Collection<Element> getSubElements();
-
-  void setSubElements(Collection<Element> subElements);
+  public void setError(Error error) {
+    this.error = error;
+  }
 }

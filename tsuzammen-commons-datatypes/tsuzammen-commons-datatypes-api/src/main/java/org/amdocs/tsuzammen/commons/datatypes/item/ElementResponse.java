@@ -16,24 +16,16 @@
 
 package org.amdocs.tsuzammen.commons.datatypes.item;
 
-import org.amdocs.tsuzammen.commons.datatypes.Id;
+import org.amdocs.tsuzammen.commons.datatypes.Response;
 
-import java.util.Collection;
+public class ElementResponse extends Response {
+  private Element element;
 
-public interface Element {
-  Id getElementId();
+  public Element getElement() {
+    return element;
+  }
 
-  void setElementId(Id elementId);
-
-  Info getInfo();
-
-  void setInfo(Info info);
-
-  Collection<Relation> getRelations();
-
-  void setRelations(Collection<Relation> relations);
-
-  Collection<Element> getSubElements();
-
-  void setSubElements(Collection<Element> subElements);
+  public void setElement(Element element) {
+    this.element = element;
+  }
 }

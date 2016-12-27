@@ -17,9 +17,12 @@
 package org.amdocs.tsuzammen.commons.datatypes.impl.item;
 
 import org.amdocs.tsuzammen.commons.datatypes.item.Content;
+import org.amdocs.tsuzammen.commons.datatypes.item.Element;
 import org.amdocs.tsuzammen.commons.datatypes.item.Entity;
+import org.amdocs.tsuzammen.commons.datatypes.item.Relation;
 import org.amdocs.tsuzammen.utils.common.CommonMethods;
 
+import java.util.Collection;
 import java.util.Map;
 
 public class CoreEntity<T extends Entity> extends EntityData implements Entity {
@@ -76,4 +79,18 @@ public class CoreEntity<T extends Entity> extends EntityData implements Entity {
     this.contents = contents;
   }
 
+  @Override
+  public void setRelations(Collection<Relation> relations) {
+
+  }
+
+  @Override
+  public Collection<Element> getSubElements() {
+    return null;
+  }
+
+  @Override
+  public void setSubElements(Collection<Element> subElements) {
+
+  }
 }
