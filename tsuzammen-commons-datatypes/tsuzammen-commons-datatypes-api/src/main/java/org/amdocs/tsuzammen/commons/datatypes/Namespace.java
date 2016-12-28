@@ -14,20 +14,24 @@
  * limitations under the License.
  */
 
-package org.amdocs.tsuzammen.commons.datatypes.item;
+package org.amdocs.tsuzammen.commons.datatypes;
 
-import java.util.HashMap;
-import java.util.Map;
+public class Namespace {
+  private String value;
 
-public class ItemVersionData {
-  private Map<String, Content> contents = new HashMap<>();
-
-  public Map<String, Content> getContents() {
-    return contents;
+  public Namespace() {
+    value = "";
   }
 
-  public void setContents(
-      Map<String, Content> contents) {
-    this.contents = contents;
+  public Namespace(Namespace parentNamespace, Id entityId) {
+    this.value = parentNamespace.getValue() + "/" + entityId.toString();
+  }
+
+  public String getValue() {
+    return value;
+  }
+
+  public void setValue(String value) {
+    this.value = value;
   }
 }

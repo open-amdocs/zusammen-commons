@@ -17,52 +17,33 @@
 package org.amdocs.tsuzammen.commons.datatypes.item;
 
 import org.amdocs.tsuzammen.commons.datatypes.Id;
+import org.amdocs.tsuzammen.commons.datatypes.item.Info;
 
-import java.util.Collection;
-
-public class ElementImpl implements Element {
+public class ElementId {
   private Id id;
   private Info info;
-  private Collection<Relation> relations;
-  private Collection<Element> subElements;
 
-  @Override
-  public Id getElementId() {
+  public ElementId() {
+  }
+
+  public ElementId(Id elementId, Info info) {
+    this.id = elementId;
+    this.info = info;
+  }
+
+  public Id getId() {
     return id;
   }
 
-  @Override
-  public void setElementId(Id elementId) {
-    id = elementId;
+  public void setId(Id id) {
+    this.id = id;
   }
 
-  @Override
   public Info getInfo() {
     return info;
   }
 
-  @Override
   public void setInfo(Info info) {
     this.info = info;
-  }
-
-  @Override
-  public Collection<Relation> getRelations() {
-    return relations;
-  }
-
-  @Override
-  public void setRelations(Collection<Relation> relations) {
-    this.relations = relations;
-  }
-
-  @Override
-  public Collection<Element> getSubElements() {
-    return subElements;
-  }
-
-  @Override
-  public void setSubElements(Collection<Element> subElements) {
-    this.subElements = subElements;
   }
 }

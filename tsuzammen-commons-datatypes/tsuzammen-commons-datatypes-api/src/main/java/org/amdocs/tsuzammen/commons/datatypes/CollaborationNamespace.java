@@ -16,16 +16,21 @@
 
 package org.amdocs.tsuzammen.commons.datatypes;
 
-public class EntityNamespace extends ContentNamespace {
-  private String entityId;
+public class CollaborationNamespace {
+  private String value;
 
-  public String getEntityId() {
-    return entityId;
+  public CollaborationNamespace() {
   }
 
-  public void setEntityId(String entityId) {
-    this.entityId = entityId;
+  public CollaborationNamespace(String value) {
+    this.value = value;
   }
 
+  public String getValue() {
+    return value;
+  }
 
+  public void setValue(String value) {
+    this.value = value;
+  }
 }

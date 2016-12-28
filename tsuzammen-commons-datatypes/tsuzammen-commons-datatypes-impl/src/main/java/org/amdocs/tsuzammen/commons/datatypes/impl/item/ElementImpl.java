@@ -16,63 +16,103 @@
 
 package org.amdocs.tsuzammen.commons.datatypes.impl.item;
 
-import org.amdocs.tsuzammen.commons.datatypes.item.Entity;
+import org.amdocs.tsuzammen.commons.datatypes.Id;
+import org.amdocs.tsuzammen.commons.datatypes.item.Element;
+import org.amdocs.tsuzammen.commons.datatypes.item.ElementId;
+import org.amdocs.tsuzammen.commons.datatypes.item.Info;
+import org.amdocs.tsuzammen.commons.datatypes.item.Relation;
 import org.amdocs.tsuzammen.utils.fileutils.FileUtils;
 
 import java.io.InputStream;
+import java.util.Collection;
 
-public class EntityData<T extends Entity> extends EntityInfo {
-  private Class<T> implClass;
+public class ElementImpl implements Element {
+  private Id id;
+  private Info info;
+  private Collection<Relation> relations;
+  private Collection<Element> subElements;
+  private Collection<ElementId> subElementIds;
   private byte[] data;
   private byte[] searchData;
   private byte[] visualization;
 
-  public EntityData() {
-
+  @Override
+  public Id getElementId() {
+    return id;
   }
 
-  public EntityData(CoreEntity<T> entity) {
-    super(entity);
-    setImplClass(entity.getImplClass());
-    setData(entity.getData());
-    setSearchData(entity.getSearchData());
-    setVisualization(entity.getVisualization());
+  @Override
+  public void setElementId(Id elementId) {
+    id = elementId;
   }
 
-  public CoreEntity<T> getCoreEntity() {
-    return new CoreEntity<>(this);
+  @Override
+  public Info getInfo() {
+    return info;
   }
 
-  public Class<T> getImplClass() {
-    return implClass;
+  @Override
+  public void setInfo(Info info) {
+    this.info = info;
   }
 
-  public void setImplClass(Class<T> implClass) {
-    this.implClass = implClass;
+  @Override
+  public Collection<Relation> getRelations() {
+    return relations;
   }
 
+  @Override
+  public void setRelations(Collection<Relation> relations) {
+    this.relations = relations;
+  }
+
+  @Override
   public InputStream getData() {
     return FileUtils.toInputStream(data);
   }
 
+  @Override
   public void setData(InputStream data) {
     this.data = FileUtils.toByteArray(data);
   }
 
+  @Override
   public InputStream getSearchData() {
     return FileUtils.toInputStream(searchData);
   }
 
+  @Override
   public void setSearchData(InputStream searchData) {
     this.searchData = FileUtils.toByteArray(searchData);
   }
 
+  @Override
   public InputStream getVisualization() {
     return FileUtils.toInputStream(visualization);
   }
 
+  @Override
   public void setVisualization(InputStream visualization) {
     this.visualization = FileUtils.toByteArray(visualization);
   }
 
+  @Override
+  public Collection<Element> getSubElements() {
+    return subElements;
+  }
+
+  @Override
+  public void setSubElements(Collection<Element> subElements) {
+    this.subElements = subElements;
+  }
+
+  @Override
+  public Collection<ElementId> getSubElementIds() {
+    return subElementIds;
+  }
+
+  @Override
+  public void setSubElementIds(Collection<ElementId> subElementIds) {
+    this.subElementIds = subElementIds;
+  }
 }

@@ -22,6 +22,7 @@ public class Id {
   private UUID value;
 
   public Id() {
+    value = UUID.randomUUID();
   }
 
   public Id(UUID value) {
@@ -32,7 +33,13 @@ public class Id {
     return value;
   }
 
+  // only for json transformation (in REST for example)
   public void setValue(UUID value) {
     this.value = value;
+  }
+
+  @Override
+  public String toString() {
+    return value == null ? "" : value.toString();
   }
 }

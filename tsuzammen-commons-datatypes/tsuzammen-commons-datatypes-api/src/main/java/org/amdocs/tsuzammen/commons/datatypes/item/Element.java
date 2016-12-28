@@ -18,6 +18,7 @@ package org.amdocs.tsuzammen.commons.datatypes.item;
 
 import org.amdocs.tsuzammen.commons.datatypes.Id;
 
+import java.io.InputStream;
 import java.util.Collection;
 
 public interface Element {
@@ -33,7 +34,23 @@ public interface Element {
 
   void setRelations(Collection<Relation> relations);
 
-  Collection<Element> getSubElements();
+  void setData(InputStream data);
+
+  void setSearchData(InputStream searchData);
+
+  void setVisualization(InputStream visualization);
+
+  InputStream getData();
+
+  InputStream getSearchData();
+
+  InputStream getVisualization();
+
+  Collection<Element> getSubElements(); // used when Element is the input of save
 
   void setSubElements(Collection<Element> subElements);
+
+  Collection<ElementId> getSubElementIds(); // used when Element is the output of get
+
+  void setSubElementIds(Collection<ElementId> subElements);
 }
