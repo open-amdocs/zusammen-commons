@@ -440,9 +440,14 @@ public class CommonMethods {
 
   public static <T> Set<T> toSingleElementSet(T element) {
     return Collections.singleton(element);
-
   }
 
-
+  public  static <T> List<T> iteratorToList(Iterable<T> iter){
+    List<T> list = new ArrayList<>();
+    for(T item:iter){
+      list.add(item);
+    }
+    return list;
+  }
 }
 

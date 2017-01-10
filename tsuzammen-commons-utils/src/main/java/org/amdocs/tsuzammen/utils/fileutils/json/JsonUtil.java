@@ -25,7 +25,7 @@ public class JsonUtil {
     return json2Object(json, (Type)classOfT);
   }
 
-  private static <T> T json2Object(String json, Type typeOfT) {
+  public static <T> T json2Object(String json, Type typeOfT) {
     T t;
     try {
       try (Reader br = new StringReader(json)) {

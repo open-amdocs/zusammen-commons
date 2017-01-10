@@ -351,4 +351,12 @@ public class FileUtils {
     file.getParentFile().mkdirs();
     return file;
   }
+
+  public static String trimPath(String path){
+
+    int lastIndex = path.lastIndexOf(File.separator);
+    return path.substring(0,lastIndex-1);
+
+  }
+
 }
