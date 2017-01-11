@@ -16,9 +16,9 @@
 
 package org.amdocs.tsuzammen.commons.db.impl.cassandra;
 
-import org.amdocs.tsuzammen.commons.datatypes.SessionContext;
 import org.amdocs.tsuzammen.commons.db.api.cassandra.CassandraConnector;
 import org.amdocs.tsuzammen.commons.db.api.cassandra.CassandraConnectorFactory;
+import org.amdocs.tsuzammen.commons.db.api.cassandra.types.CassandraContext;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -29,7 +29,7 @@ public class CassandraConnectorFactoryImpl extends CassandraConnectorFactory {
   private static Map<String, CassandraConnector> connectorByTenant = new HashMap<>();
 
   @Override
-  public CassandraConnector createInterface(SessionContext context) {
+  public CassandraConnector createInterface(CassandraContext context) {
     String connectorKey = context.getTenant() == null ? DEFAULT_CONNECTOR_KEY : context.getTenant();
     CassandraConnector connector = connectorByTenant.get(connectorKey);
     return connector == null ? create(context.getTenant(), connectorKey) : connector;

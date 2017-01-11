@@ -13,19 +13,16 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+package org.amdocs.tsuzammen.commons.db.api.cassandra.types;
 
-package org.amdocs.tsuzammen.commons.configuration.impl;
+public class CassandraContext {
+  private String tenant;
 
-import org.amdocs.tsuzammen.commons.configuration.ConfigurationManager;
-import org.amdocs.tsuzammen.commons.configuration.ConfigurationManagerFactory;
+  public String getTenant() {
+    return tenant;
+  }
 
-public class ConfigurationManagerFactoryImpl extends ConfigurationManagerFactory {
-
-  private static final ConfigurationManager INSTANCE = new ConfigurationManagerImpl();
-
-  @Override
-  public ConfigurationManager createInterface() {
-    return INSTANCE;
+  public void setTenant(String tenant) {
+    this.tenant = tenant;
   }
 }
-

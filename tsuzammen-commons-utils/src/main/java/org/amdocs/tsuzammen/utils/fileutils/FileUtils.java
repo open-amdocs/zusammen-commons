@@ -39,11 +39,16 @@ import java.util.zip.ZipInputStream;
 public class FileUtils {
 
   public static InputStream getFileInputStream(String fileName) {
-    URL urlFile = FileUtils.class.getClassLoader().getResource(fileName);
     InputStream is;
+    URL urlFile = FileUtils.class.getClassLoader().getResource(fileName);
     try {
-      assert urlFile != null;
-      is = urlFile.openStream();
+
+      if(urlFile!=null){
+        is = urlFile.openStream();
+      }
+      else{
+        is = new FileInputStream(new File(fileName));
+      }
     } catch (IOException e) {
       throw new RuntimeException(e);
     }
@@ -346,4 +351,12 @@ public class FileUtils {
     file.getParentFile().mkdirs();
     return file;
   }
+
+  public static String trimPath(String path){
+
+    int lastIndex = path.lastIndexOf(File.separator);
+    return path.substring(0,lastIndex-1);
+
+  }
+
 }

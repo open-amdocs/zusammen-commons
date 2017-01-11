@@ -16,7 +16,6 @@
 
 package org.amdocs.tsuzammen.commons.configuration;
 
-import org.amdocs.tsuzammen.commons.datatypes.SessionContext;
 import org.amdocs.tsuzammen.utils.facade.api.AbstractComponentFactory;
 import org.amdocs.tsuzammen.utils.facade.api.AbstractFactory;
 
