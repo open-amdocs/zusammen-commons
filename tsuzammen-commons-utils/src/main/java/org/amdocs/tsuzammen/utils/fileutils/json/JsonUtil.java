@@ -13,6 +13,8 @@ import java.io.InputStreamReader;
 import java.io.Reader;
 import java.io.StringReader;
 import java.lang.reflect.Type;
+import java.util.Map;
+import java.util.Objects;
 
 
 public class JsonUtil {
@@ -23,6 +25,14 @@ public class JsonUtil {
 
   public static <T> T json2Object(String json, Class<T> classOfT) {
     return json2Object(json, (Type)classOfT);
+  }
+
+  public static String inputStream2Json(InputStream is){
+    if(Objects.isNull(is)){
+      throw new RuntimeException("Input object is null");
+    }
+    Map mapObject = json2Object(is, Map.class);
+    return object2Json(mapObject);
   }
 
   private static <T> T json2Object(String json, Type typeOfT) {
