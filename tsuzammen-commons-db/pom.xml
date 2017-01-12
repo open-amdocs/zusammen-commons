@@ -21,7 +21,7 @@
     <parent>
         <artifactId>tsuzammen-commons</artifactId>
         <groupId>org.amdocs.tsuzammen</groupId>
-        <version>1.0-SNAPSHOT</version>
+        <version>0.0.1</version>
     </parent>
     <artifactId>tsuzammen-commons-db</artifactId>
     <packaging>pom</packaging>
