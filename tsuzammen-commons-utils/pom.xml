@@ -17,27 +17,14 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0"
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-    <parent>
-        <artifactId>tsuzammen-commons</artifactId>
-        <groupId>org.amdocs.tsuzammen</groupId>
-        <version>0.0.1</version>
-    </parent>
 
+    <groupId>org.amdocs.tsuzammen</groupId>
     <artifactId>tsuzammen-commons-utils</artifactId>
+    <version>0.0.1</version>
     <packaging>jar</packaging>
     <modelVersion>4.0.0</modelVersion>
 
     <dependencies>
-        <!--dependency>
-            <groupId>commons-codec</groupId>
-            <artifactId>commons-codec</artifactId>
-            <version>1.9</version>
-        </dependency-->
-        <!--dependency>
-            <groupId>org.apache.commons</groupId>
-            <artifactId>commons-collections4</artifactId>
-            <version>4.1</version>
-        </dependency-->
         <dependency>
             <groupId>com.google.code.gson</groupId>
             <artifactId>gson</artifactId>
@@ -49,5 +36,92 @@
             <version>1.7.10</version>
         </dependency>
     </dependencies>
+
+    <url>http://maven.apache.org</url>
+    <properties>
+        <java.source>1.8</java.source>
+        <java.target>1.8</java.target>
+    </properties>
+    <profiles>
+        <profile>
+            <id>tsuzammen</id>
+            <activation>
+                <activeByDefault>true</activeByDefault>
+            </activation>
+            <properties>
+                <amdocs.repository.host>10.147.3.4</amdocs.repository.host>
+                <amdocs.repository.port>8081</amdocs.repository.port>
+                <amdocs.repository.address>${amdocs.repository.host}:${amdocs.repository.port}
+                </amdocs.repository.address>
+                <amdocs.repository.updatePolicy.default>daily
+                </amdocs.repository.updatePolicy.default>
+            </properties>
+            <repositories>
+                <repository>
+                    <id>Amdocs</id>
+                    <name>Amdocs public</name>
+                    <url>
+                        http://${amdocs.repository.address}:${amdocs.repository.port}/nexus/content/groups/public/
+                    </url>
+                    <releases>
+                        <enabled>true</enabled>
+                        <updatePolicy>${amdocs.repository.updatePolicy.default}</updatePolicy>
+                        <checksumPolicy>ignore</checksumPolicy>
+                    </releases>
+                    <snapshots>
+                        <enabled>false</enabled>
+                        <updatePolicy>${amdocs.repository.updatePolicy.default}</updatePolicy>
+                        <checksumPolicy>ignore</checksumPolicy>
+                    </snapshots>
+                </repository>
+                <repository>
+                    <id>snapshots</id>
+                    <name>Maven Snapshot Repository</name>
+                    <url>http://${amdocs.repository.address}/nexus/content/repositories/snapshots/
+                    </url>
+                    <releases>
+                        <enabled>false</enabled>
+                        <updatePolicy>${amdocs.repository.updatePolicy.default}</updatePolicy>
+                        <checksumPolicy>ignore</checksumPolicy>
+                    </releases>
+                    <snapshots>
+                        <enabled>true</enabled>
+                        <updatePolicy>${amdocs.repository.updatePolicy.default}</updatePolicy>
+                        <checksumPolicy>ignore</checksumPolicy>
+                    </snapshots>
+                </repository>
+            </repositories>
+            <distributionManagement>
+                <repository>
+                    <id>SUZAMMEN</id>
+                    <url>http://${amdocs.repository.address}/nexus/repository/suzammen-release</url>
+                </repository>
+                <snapshotRepository>
+                    <id>snapshots</id>
+                    <url>http://${amdocs.repository.address}/nexus/content/repositories/snapshots
+                    </url>
+                    <uniqueVersion>false</uniqueVersion>
+                </snapshotRepository>
+            </distributionManagement>
+        </profile>
+    </profiles>
+    <build>
+        <plugins>
+
+            <!-- ================================================== -->
+            <!-- Set the JDK compiler version.                      -->
+            <!-- ================================================== -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.3</version>
+                <inherited>true</inherited>
+                <configuration>
+                    <source>${java.source}</source>
+                    <target>${java.target}</target>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
 
 </project>
