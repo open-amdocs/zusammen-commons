@@ -34,8 +34,15 @@ class CassandraConfig {
   private static final String TRUST_STORE_PASSWORD = "cassandra.truststore.password";
 
   static String[] getNodes() {
-    List<String> nodes = ConfigurationAccessor.getProperty(NODES);
-    return nodes.toArray(new String[nodes.size()]);
+    Object nodesObject = ConfigurationAccessor.getProperty(NODES);
+    if(nodesObject instanceof List){
+      List<String> nodes =  (List<String>)nodesObject;
+      return nodes.toArray(new String[nodes.size()]);
+    }else{
+      return ((String)nodesObject).split(",");
+    }
+
+
   }
 
   static String getKeyspace() {
