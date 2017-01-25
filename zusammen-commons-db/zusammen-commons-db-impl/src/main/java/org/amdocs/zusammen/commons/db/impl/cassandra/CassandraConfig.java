@@ -58,11 +58,12 @@ class CassandraConfig {
   }
 
   static boolean isAuthenticate() {
-    return ConfigurationAccessor.getProperty(AUTHENTICATE);
+    return getBoolean(ConfigurationAccessor.getProperty(AUTHENTICATE));
   }
 
   static boolean isSsl() {
-    return ConfigurationAccessor.getProperty(SSL);
+
+    return getBoolean(ConfigurationAccessor.getProperty(SSL));
   }
 
   static Optional<Integer> getSslPort() {
@@ -76,5 +77,13 @@ class CassandraConfig {
 
   static Optional<String> getTrustStorePassword() {
     return ConfigurationAccessor.getOptionalProperty(TRUST_STORE_PASSWORD);
+  }
+
+  static boolean getBoolean(Object value){
+    if(value instanceof String){
+      return "true".equals(value);
+    }
+    return ((Boolean)value).booleanValue();
+
   }
 }
