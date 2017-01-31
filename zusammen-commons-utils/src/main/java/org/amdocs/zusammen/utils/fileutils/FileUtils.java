@@ -164,11 +164,18 @@ public class FileUtils {
     ByteArrayOutputStream output = new ByteArrayOutputStream();
     try {
       copy(input, output);
+      byte[] returnValue = output.toByteArray();
+      return returnValue;
     } catch (IOException e) {
       throw new RuntimeException(
-          "error will convertion input stream to byte array:" + e.getMessage());
+          "error will converting input stream to byte array:" + e.getMessage());
+    }finally {
+      try {
+        output.close();
+      } catch (IOException e) {
+        e.printStackTrace();
+      }
     }
-    return output.toByteArray();
   }
 
   public static InputStream toInputStream(byte[] bytes) {
@@ -301,7 +308,7 @@ public class FileUtils {
         try {
           fos.close();
         } catch (IOException e) {
-          e.printStackTrace();
+          throw new RuntimeException(e);
         }
     }
     return file;
@@ -333,7 +340,7 @@ public class FileUtils {
         try {
           fileDataOut.close();
         } catch (IOException e) {
-          e.printStackTrace();
+          throw new RuntimeException(e);
         }
     }
 

@@ -84,36 +84,5 @@ public class JsonUtil {
     }
   }
 
-//    public static List<String> validate(String json, String jsonSchema) {
-//        List<ValidationException> validationErrors = validateUsingEverit(json, jsonSchema);
-//        return validationErrors == null ? null : validationErrors.stream().map(JsonUtil::mapValidationExceptionToMessage).collect(Collectors.toList());
-//    }
 
-//    private static String mapValidationExceptionToMessage(ValidationException e) {
-//        if (e.getViolatedSchema() instanceof EnumSchema) {
-//            return mapEnumViolationToMessage(e);
-//        }
-//        return e.getMessage();
-//    }
-
-//    private static String mapEnumViolationToMessage(ValidationException e) {
-//        Set<Object> possibleValues = ((EnumSchema) e.getViolatedSchema()).getPossibleValues();
-//        return e.getMessage().replaceFirst("enum value", possibleValues.size() == 1 ?
-//                String.format("value. %s is the only possible value for this field", possibleValues.iterator().next())
-//                : String.format("value. Possible values: %s", CommonMethods.collectionToCommaSeparatedString(possibleValues.stream().map(Object::toString).collect(Collectors.toList()))));
-//    }
-
-//    private static List<ValidationException> validateUsingEverit(String json, String jsonSchema) {
-//        if (json == null || jsonSchema == null) {
-//            throw new IllegalArgumentException("Input strings json and jsonSchema can not be null");
-//        }
-//
-//        Schema schemaObj = SchemaLoader.load(new JSONObject(jsonSchema));
-//        try {
-//            schemaObj.validate(new JSONObject(json));
-//        } catch (ValidationException ve) {
-//            return CollectionUtils.isEmpty(ve.getCausingExceptions()) ? Collections.singletonList(ve) : ve.getCausingExceptions();
-//        }
-//        return null;
-//    }
 }
