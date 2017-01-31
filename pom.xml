@@ -17,6 +17,7 @@
             <activation>
                 <activeByDefault>true</activeByDefault>
             </activation>
+            <!--
             <properties>
                 <amdocs.repository.host>10.147.3.4</amdocs.repository.host>
                 <amdocs.repository.port>8081</amdocs.repository.port>
@@ -72,15 +73,14 @@
                     <uniqueVersion>false</uniqueVersion>
                 </snapshotRepository>
             </distributionManagement>
+         -->
         </profile>
     </profiles>
-    <!--modules>
+    <modules>
         <module>zusammen-commons-db</module>
         <module>zusammen-commons-utils</module>
-        <module>zusammen-commons-datatypes</module>
         <module>zusammen-commons-configuration</module>
-    </modules-->
-
+    </modules>
 
     <build>
         <plugins>
