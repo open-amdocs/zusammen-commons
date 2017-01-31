@@ -24,7 +24,7 @@ public class JsonUtil {
   }
 
   public static <T> T json2Object(String json, Class<T> classOfT) {
-    return json2Object(json, (Type)classOfT);
+    return json2Object(json, (Type) classOfT);
   }
 
   public static <T> T json2Object(String json, Type typeOfT) {
@@ -41,12 +41,16 @@ public class JsonUtil {
     return t;
   }
 
-  public static String inputStream2Json(InputStream is){
-    if(Objects.isNull(is)){
+  public static String inputStream2Json(InputStream is) {
+    if (Objects.isNull(is)) {
       throw new RuntimeException("Input object is null");
     }
     Map mapObject = json2Object(is, Map.class);
     return object2Json(mapObject);
+  }
+
+  public static <T> T json2Object(InputStream is, Class<T> classOfT) {
+    return json2Object(is, (Type) classOfT);
   }
 
   public static <T> T json2Object(InputStream is, Type typeOfT) {
@@ -56,18 +60,6 @@ public class JsonUtil {
         t = new Gson().fromJson(br, typeOfT);
       } catch (IOException e) {
         throw e;
-      }
-    } catch (JsonIOException | JsonSyntaxException | IOException e) {
-      throw new RuntimeException(e);
-    }
-    return t;
-  }
-
-  public static <T> T json2Object(InputStream is, Class<T> classOfT) {
-    T t;
-    try {
-      try (Reader br = new BufferedReader(new InputStreamReader(is))) {
-        t = new Gson().fromJson(br, classOfT);
       }
     } catch (JsonIOException | JsonSyntaxException | IOException e) {
       throw new RuntimeException(e);
