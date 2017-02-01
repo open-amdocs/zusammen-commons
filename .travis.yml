@@ -1,15 +1,28 @@
 language: java
+
 sudo: false
+
 script: mvn clean install
+
 jdk:
   - oraclejdk8
+
 services:
   - cassandra
 
 cache:
   directories:
   - $HOME/.m2
-  
+
+# blocklist
+branches:
+  except:
+
+# safelist
+branches:
+  only:
+  - master
+
 after_success:
   - bash <(curl -s https://codecov.io/bash)
 
