@@ -39,7 +39,7 @@
             <activation>
                 <activeByDefault>true</activeByDefault>
             </activation>
-            <properties>
+            <!--properties>
                 <amdocs.repository.host>10.147.3.4</amdocs.repository.host>
                 <amdocs.repository.port>8081</amdocs.repository.port>
                 <amdocs.repository.address>${amdocs.repository.host}:${amdocs.repository.port}
@@ -93,7 +93,7 @@
                     </url>
                     <uniqueVersion>false</uniqueVersion>
                 </snapshotRepository>
-            </distributionManagement>
+            </distributionManagement-->
         </profile>
     </profiles>
     <build>
