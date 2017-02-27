@@ -23,7 +23,9 @@
         <module>zusammen-commons-db</module>
         <module>zusammen-commons-utils</module>
         <module>zusammen-commons-configuration</module>
+        <module>zusammen-commons-log</module>
     </modules>
+
 
     <build>
         <plugins>
