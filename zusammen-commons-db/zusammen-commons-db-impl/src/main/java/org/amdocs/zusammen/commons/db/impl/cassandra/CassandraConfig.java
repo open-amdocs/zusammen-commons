@@ -68,7 +68,7 @@ class CassandraConfig {
 
   static Optional<Integer> getSslPort() {
     Optional<String> sslPort = ConfigurationAccessor.getOptionalProperty(SSL_PORT);
-    return sslPort.map(Integer::parseInt);
+    return sslPort.filter(port->!port.equals("0") ).map(Integer::parseInt);
   }
 
   static Optional<String> getTrustStore() {

@@ -18,7 +18,7 @@ package org.amdocs.zusammen.commons.db.impl.cassandra;
 
 import com.datastax.driver.core.Cluster;
 import com.datastax.driver.core.Cluster.Builder;
-import com.datastax.driver.core.JdkSSLOptions;
+//import com.datastax.driver.core.JdkSSLOptions;
 import com.datastax.driver.core.SSLOptions;
 import com.datastax.driver.core.Session;
 
@@ -103,8 +103,9 @@ class CassandraSessionFactory {
         throw new RuntimeException(e);
       }
       String[] css = new String[]{"TLS_RSA_WITH_AES_128_CBC_SHA"};
-      return Optional
-          .of(JdkSSLOptions.builder().withSSLContext(context).withCipherSuites(css).build());
+      /*return Optional
+          .of(JdkSSLOptions.builder().withSSLContext(context).withCipherSuites(css).build());*/
+      return Optional.of(new SSLOptions(context, css));
     }
     return Optional.empty();
   }
