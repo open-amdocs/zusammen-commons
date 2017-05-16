@@ -6,7 +6,6 @@ public class HealthInfo  {
     protected HealthStatus healthStatus;
     protected String description;
 
-
     public HealthInfo() {
     }
 
