@@ -295,9 +295,7 @@ public class CommonMethods {
     public static <T> T newInstance(Class<T> cls) {
         try {
             return cls.newInstance();
-        } catch (InstantiationException e) {
-            throw new RuntimeException(e);
-        } catch (IllegalAccessException e) {
+        } catch (InstantiationException | IllegalAccessException e) {
             throw new RuntimeException(e);
         }
     }

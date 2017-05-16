@@ -24,6 +24,7 @@
         <module>zusammen-commons-utils</module>
         <module>zusammen-commons-configuration</module>
         <module>zusammen-commons-log</module>
+        <module>zusammen-commons-health</module>
     </modules>
 
 
