@@ -30,7 +30,7 @@ public final class FactoryConfig {
 
     try {
       INSTANCE = CommonMethods.newInstance(
-          "FactoriesConfigImpl", FactoriesConfiguration.class);
+          "com.amdocs.zusammen.utils.facade.impl.FactoriesConfigImpl", FactoriesConfiguration.class);
     } catch (Exception e) {
       e.printStackTrace();
       throw e;
