@@ -18,11 +18,17 @@
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 
-    <groupId>com.amdocs.zusammen</groupId>
+
     <artifactId>zusammen-commons-health</artifactId>
-    <version>0.0.2</version>
+    <version>0.0.1-SNAPSHOT</version>
     <packaging>jar</packaging>
     <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <groupId>com.amdocs.zusammen</groupId>
+        <artifactId>zusammen-commons</artifactId>
+        <version>0.0.1-SNAPSHOT</version>
+    </parent>
+
 
     <dependencies>
         <dependency>
@@ -33,12 +39,12 @@
         <dependency>
             <groupId>com.amdocs.zusammen</groupId>
             <artifactId>zusammen-commons-log</artifactId>
-            <version>0.0.2</version>
+            <version>0.0.1-SNAPSHOT</version>
         </dependency>
         <dependency>
             <groupId>com.amdocs.zusammen</groupId>
             <artifactId>zusammen-commons-utils</artifactId>
-            <version>0.0.2</version>
+            <version>0.0.1-SNAPSHOT</version>
         </dependency>
         <!--dependency>
             <groupId>org.slf4j</groupId>

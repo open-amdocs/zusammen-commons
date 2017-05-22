@@ -4,12 +4,13 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>com.amdocs.zusammen</groupId>
     <artifactId>zusammen-commons</artifactId>
-    <version>0.0.2</version>
+    <version>0.0.1-SNAPSHOT</version>
     <packaging>pom</packaging>
     <url>http://maven.apache.org</url>
     <properties>
         <java.source>1.8</java.source>
         <java.target>1.8</java.target>
+        <!--<project.version>0.0.1-SNAPSHOT</project.version>-->
     </properties>
     <profiles>
         <profile>
@@ -27,7 +28,6 @@
         <module>zusammen-commons-health</module>
     </modules>
 
-
     <build>
         <plugins>
 
@@ -44,6 +44,7 @@
                     <target>${java.target}</target>
                 </configuration>
             </plugin>
+
         </plugins>
     </build>
 </project>
