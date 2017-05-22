@@ -1,3 +1,3 @@
 {
-  "org.amdocs.zusammen.commons.log.ZusammenLoggerFactory": "org.amdocs.zusammen.commons.log.impl.ZusammenSLF4JLoggerFactoryImpl"
+  "com.amdocs.zusammen.commons.log.ZusammenLoggerFactory": "com.amdocs.zusammen.commons.log.impl.ZusammenSLF4JLoggerFactoryImpl"
 }

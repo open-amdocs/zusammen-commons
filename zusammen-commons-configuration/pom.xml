@@ -21,9 +21,9 @@
     <packaging>jar</packaging>
     <dependencies>
         <dependency>
-            <groupId>org.amdocs.zusammen</groupId>
+            <groupId>com.amdocs.zusammen</groupId>
             <artifactId>zusammen-commons-utils</artifactId>
-            <version>0.0.1</version>
+            <version>0.0.2</version>
         </dependency>
         <dependency>
             <groupId>org.testng</groupId>
@@ -34,8 +34,8 @@
     </dependencies>
 
     <artifactId>zusammen-commons-configuration</artifactId>
-    <groupId>org.amdocs.zusammen</groupId>
-    <version>0.0.1</version>
+    <groupId>com.amdocs.zusammen</groupId>
+    <version>0.0.2</version>
 
     <url>http://maven.apache.org</url>
     <properties>
