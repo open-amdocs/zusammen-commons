@@ -67,7 +67,7 @@
                 </configuration>
             </plugin>
             <!--  Sources  -->
- <!--           <plugin>
+            <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-source-plugin</artifactId>
                 <version>${maven-source-plugin.version}</version>
@@ -80,7 +80,7 @@
                     </execution>
                 </executions>
             </plugin>
-            &lt;!&ndash;  Javadocs  &ndash;&gt;
+            <!--  Javadocs  -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-javadoc-plugin</artifactId>
@@ -103,7 +103,7 @@
                     </execution>
                 </executions>
             </plugin>
-            &lt;!&ndash;  GPG Signature  &ndash;&gt;
+            <!--  GPG Signature  -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-gpg-plugin</artifactId>
@@ -118,7 +118,7 @@
                     </execution>
                 </executions>
 
-            </plugin>-->
+            </plugin>
 
         </plugins>
 
