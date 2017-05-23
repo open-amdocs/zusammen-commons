@@ -209,11 +209,13 @@ public class CommonMethods {
      * all elements to it or returns one of input arrays if another one is
      * empty.
      *
+     * @param <T> left+right
      * @param left  Elements of this array will be copied to positions from 0 to <tt>left.length -
      *              1</tt> in the target array.
      * @param right Elements of this array will be copied to positions from <tt>left.length</tt> to
      *              <tt>left.length + right.length</tt>
-     * @return A newly allocate Java array that accommodates elements of source (left/right) arrays or
+     * @return T[] newly allocate Java array that accommodates elements of source (left/right)
+     * arrays or
      * one of source arrays if another is empty, <tt>null</tt> - otherwise.
      */
     @SuppressWarnings("unchecked")
@@ -240,6 +242,8 @@ public class CommonMethods {
      * version the type name of the current object instance is specified in the
      * error message if casting fails to simplify error tracking.
      *
+     * @param <B> origin instance
+     * @param <D> casted instance
      * @param b   An object instance to be casted to the specified Java type.
      * @param cls Target Java type.
      * @return Object instance safely casted to the requested Java type.
@@ -351,6 +355,7 @@ public class CommonMethods {
      * Converts array of strings to comma-separated string.
      *
      * @param arr array of strings
+     * @return String comma Separated value
      */
     public static String arrayToCommaSeparatedString(String[] arr) {
         return arrayToSeparatedString(arr, ',');
@@ -367,6 +372,8 @@ public class CommonMethods {
      * Converts array of strings to string separated with specified character.
      *
      * @param arr array of strings
+     * @param separator separator
+     * @return String comma Separated value
      */
     public static String arrayToSeparatedString(String[] arr, char separator) {
         return listToSeparatedString(Arrays.asList(arr), separator);
@@ -377,6 +384,8 @@ public class CommonMethods {
      * Converts array of strings to string separated with specified character.
      *
      * @param list array of strings
+     * @param separator separator
+     * @return String comma Separated value
      */
     public static String listToSeparatedString(List<String> list, char separator) {
         String res = null;

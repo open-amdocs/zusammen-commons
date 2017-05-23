@@ -30,7 +30,7 @@ import com.amdocs.zusammen.utils.facade.impl.AbstractFactoryBase;
  *                     AbstractFactory&lt;IUnknown&gt;
  *                                ^
  *                                |
- *   Application code ----> ConcreteFactory
+ *   Application code ---- ConcreteFactory
  *                                ^
  *                                |
  *                      +---------+---------+
@@ -55,7 +55,7 @@ import com.amdocs.zusammen.utils.facade.impl.AbstractFactoryBase;
  * }
  * </pre>
  *
- * @param <I> Java interface type created by the factory.
+ *
  */
 public abstract class AbstractFactory<I> extends AbstractFactoryBase {
 

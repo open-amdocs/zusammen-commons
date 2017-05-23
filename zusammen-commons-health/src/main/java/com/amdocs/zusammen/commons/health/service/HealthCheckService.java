@@ -17,7 +17,8 @@ public abstract class HealthCheckService<Context> implements HealthCheck<Context
     private String moduleName;
 
     /**
-     * @todo read write lock
+     *
+     * @param moduleName
      */
     public HealthCheckService(String moduleName) {
         this.moduleName = moduleName;
