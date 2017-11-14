@@ -23,7 +23,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>com.amdocs.zusammen</groupId>
     <artifactId>zusammen-commons</artifactId>
-    <version>0.0.1-SNAPSHOT</version>
+    <version>0.2.3</version>
     <packaging>pom</packaging>
     <url>http://maven.apache.org</url>
     <properties>
@@ -32,7 +32,7 @@
         <maven-source-plugin.version>3.0.1</maven-source-plugin.version>
         <maven-javadoc-plugin.version>2.10.4</maven-javadoc-plugin.version>
         <maven-gpg-plugin.version>1.6</maven-gpg-plugin.version>
-        <!--<project.version>0.0.1-SNAPSHOT</project.version>-->
+        <!--<project.version>0.2.3</project.version>-->
     </properties>
     <profiles>
         <profile>
@@ -121,8 +121,5 @@
             </plugin>
 
         </plugins>
-
     </build>
-
-
 </project>
