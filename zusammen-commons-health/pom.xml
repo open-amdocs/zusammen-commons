@@ -20,13 +20,13 @@
 
 
     <artifactId>zusammen-commons-health</artifactId>
-    <version>0.2.3</version>
+    <version>0.2.4</version>
     <packaging>jar</packaging>
     <modelVersion>4.0.0</modelVersion>
     <parent>
         <groupId>com.amdocs.zusammen</groupId>
         <artifactId>zusammen-commons</artifactId>
-        <version>0.2.3</version>
+        <version>0.2.4</version>
     </parent>
 
 
@@ -39,12 +39,12 @@
         <dependency>
             <groupId>com.amdocs.zusammen</groupId>
             <artifactId>zusammen-commons-log</artifactId>
-            <version>0.2.3</version>
+            <version>0.2.4</version>
         </dependency>
         <dependency>
             <groupId>com.amdocs.zusammen</groupId>
             <artifactId>zusammen-commons-utils</artifactId>
-            <version>0.2.3</version>
+            <version>0.2.4</version>
         </dependency>
         <!--dependency>
             <groupId>org.slf4j</groupId>

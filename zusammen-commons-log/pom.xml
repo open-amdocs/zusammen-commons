@@ -22,17 +22,17 @@
 
     <groupId>com.amdocs.zusammen</groupId>
     <artifactId>zusammen-commons-log</artifactId>
-    <version>0.2.3</version>
+    <version>0.2.4</version>
     <parent>
         <groupId>com.amdocs.zusammen</groupId>
         <artifactId>zusammen-commons</artifactId>
-        <version>0.2.3</version>
+        <version>0.2.4</version>
     </parent>
     <dependencies>
         <dependency>
             <groupId>com.amdocs.zusammen</groupId>
             <artifactId>zusammen-commons-configuration</artifactId>
-            <version>0.2.3</version>
+            <version>0.2.4</version>
         </dependency>
         <dependency>
            <groupId>org.slf4j</groupId>

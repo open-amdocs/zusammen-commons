@@ -20,10 +20,14 @@
 
     <groupId>com.amdocs.zusammen</groupId>
     <artifactId>zusammen-commons-utils</artifactId>
-    <version>0.2.3</version>
+    <version>0.2.4</version>
     <packaging>jar</packaging>
     <modelVersion>4.0.0</modelVersion>
-
+    <parent>
+        <groupId>com.amdocs.zusammen</groupId>
+        <artifactId>zusammen-commons</artifactId>
+        <version>0.2.4</version>
+    </parent>
     <dependencies>
         <dependency>
             <groupId>com.google.code.gson</groupId>

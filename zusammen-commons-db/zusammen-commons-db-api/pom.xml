@@ -21,7 +21,7 @@
     <parent>
         <artifactId>zusammen-commons-db</artifactId>
         <groupId>com.amdocs.zusammen</groupId>
-        <version>0.2.3</version>
+        <version>0.2.4</version>
     </parent>
     <artifactId>zusammen-commons-db-api</artifactId>
     <packaging>jar</packaging>
@@ -30,7 +30,7 @@
         <dependency>
             <groupId>com.amdocs.zusammen</groupId>
             <artifactId>zusammen-commons-utils</artifactId>
-            <version>0.2.3</version>
+            <version>0.2.4</version>
         </dependency>
         <dependency>
             <groupId>com.datastax.cassandra</groupId>
