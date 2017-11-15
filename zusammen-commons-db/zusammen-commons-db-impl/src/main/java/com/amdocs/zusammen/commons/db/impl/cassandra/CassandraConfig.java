@@ -32,6 +32,8 @@ class CassandraConfig {
   private static final String SSL_PORT = "cassandra.ssl.port";
   private static final String TRUST_STORE = "cassandra.truststore";
   private static final String TRUST_STORE_PASSWORD = "cassandra.truststore.password";
+  private static final String DATA_CENTER = "cassandra.datacenter";
+  private static final String CONSISTENCY_LEVEL = "cassandra.consistency.level";
 
   static String[] getNodes() {
     Object nodesObject = ConfigurationAccessor.getProperty(NODES);
@@ -85,5 +87,13 @@ class CassandraConfig {
     }
     return ((Boolean)value).booleanValue();
 
+  }
+
+  public static Optional<String>  getDataCenter() {
+    return ConfigurationAccessor.getOptionalProperty(DATA_CENTER);
+  }
+
+  public static Optional<String>  getConsistencyLevel() {
+    return ConfigurationAccessor.getOptionalProperty(CONSISTENCY_LEVEL);
   }
 }

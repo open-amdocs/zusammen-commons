@@ -19,8 +19,13 @@ package com.amdocs.zusammen.commons.db.impl.cassandra;
 import com.datastax.driver.core.Cluster;
 import com.datastax.driver.core.Cluster.Builder;
 //import com.datastax.driver.core.JdkSSLOptions;
+import com.datastax.driver.core.ConsistencyLevel;
+import com.datastax.driver.core.QueryOptions;
 import com.datastax.driver.core.SSLOptions;
 import com.datastax.driver.core.Session;
+import com.datastax.driver.core.policies.DCAwareRoundRobinPolicy;
+import com.datastax.driver.core.policies.LoadBalancingPolicy;
+import com.datastax.driver.core.policies.TokenAwarePolicy;
 
 import javax.net.ssl.SSLContext;
 import javax.net.ssl.TrustManagerFactory;
@@ -75,6 +80,19 @@ class CassandraSessionFactory {
       builder.withCredentials(CassandraConfig.getUser(), CassandraConfig.getPassword());
     }
 
+    Optional<String> dataCenter = CassandraConfig.getDataCenter();
+    if (dataCenter.isPresent()) {
+      LoadBalancingPolicy tokenAwarePolicy = new TokenAwarePolicy(
+          DCAwareRoundRobinPolicy.builder().withLocalDc(dataCenter.get()).build());
+      builder.withLoadBalancingPolicy(tokenAwarePolicy);
+    }
+    if(nodes != null && nodes.length>1) {
+      Optional<String> consistencyLevel = CassandraConfig.getConsistencyLevel();
+      if (consistencyLevel.isPresent()) {
+        builder.withQueryOptions(new QueryOptions().setConsistencyLevel(ConsistencyLevel.valueOf
+            (consistencyLevel.get())));
+      }
+    }
     return builder.build();
   }
 
@@ -103,7 +121,7 @@ class CassandraSessionFactory {
         throw new RuntimeException(e);
       }
       String[] css = new String[]{"TLS_RSA_WITH_AES_128_CBC_SHA"};
-      /*return Optional
+     /* return Optional
           .of(JdkSSLOptions.builder().withSSLContext(context).withCipherSuites(css).build());*/
       return Optional.of(new SSLOptions(context, css));
     }
