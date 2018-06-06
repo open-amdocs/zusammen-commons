@@ -21,7 +21,6 @@
     <modelVersion>4.0.0</modelVersion>
 
     <artifactId>zusammen-commons-log</artifactId>
-    <version>0.0.1-SNAPSHOT</version>
     <parent>
         <groupId>com.amdocs.zusammen</groupId>
         <artifactId>zusammen-commons</artifactId>
@@ -31,7 +30,7 @@
         <dependency>
             <groupId>com.amdocs.zusammen</groupId>
             <artifactId>zusammen-commons-configuration</artifactId>
-            <version>0.0.1-SNAPSHOT</version>
+            <version>${project.version}</version>
         </dependency>
         <dependency>
            <groupId>org.slf4j</groupId>

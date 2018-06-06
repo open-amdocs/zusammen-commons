@@ -34,7 +34,6 @@
     </dependencies>
 
     <artifactId>zusammen-commons-configuration</artifactId>
-    <version>0.0.1-SNAPSHOT</version>
 
     <parent>
         <groupId>com.amdocs.zusammen</groupId>
