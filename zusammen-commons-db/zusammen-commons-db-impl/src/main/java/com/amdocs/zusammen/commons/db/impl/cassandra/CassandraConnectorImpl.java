@@ -16,21 +16,21 @@
 
 package com.amdocs.zusammen.commons.db.impl.cassandra;
 
-import com.datastax.driver.core.Session;
-import com.datastax.driver.mapping.MappingManager;
 import com.amdocs.zusammen.commons.db.api.cassandra.CassandraConnector;
+import com.amdocs.zusammen.commons.db.api.cassandra.types.CassandraContext;
+import com.datastax.driver.core.Configuration;
+import com.datastax.driver.mapping.MappingManager;
 
 public class CassandraConnectorImpl implements CassandraConnector {
-  private final Session session;
-  private final MappingManager mappingManager;
 
-  CassandraConnectorImpl(Session session) {
-    this.session = session;
-    mappingManager = new MappingManager(this.session);
+  @Override
+  public MappingManager getMappingManager(CassandraContext context) {
+    return CassandraConnectionFactory.getMappingManager(context.getTenant());
   }
 
   @Override
-  public MappingManager getMappingManager() {
-    return mappingManager;
+  public Configuration getConfiguration() {
+    return CassandraConnectionFactory.getConfiguration();
   }
+
 }

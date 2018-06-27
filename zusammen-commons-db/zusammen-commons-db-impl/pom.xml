@@ -38,6 +38,11 @@
             <artifactId>zusammen-commons-configuration</artifactId>
             <version>${project.version}</version>
         </dependency>
+        <dependency>
+            <groupId>com.amdocs.zusammen</groupId>
+            <artifactId>zusammen-commons-log</artifactId>
+            <version>${project.version}</version>
+        </dependency>
     </dependencies>
     <build>
 	<plugins>

@@ -18,27 +18,14 @@ package com.amdocs.zusammen.commons.db.impl.cassandra;
 
 import com.amdocs.zusammen.commons.db.api.cassandra.CassandraConnector;
 import com.amdocs.zusammen.commons.db.api.cassandra.CassandraConnectorFactory;
-import com.amdocs.zusammen.commons.db.api.cassandra.types.CassandraContext;
-
-import java.util.HashMap;
-import java.util.Map;
 
 public class CassandraConnectorFactoryImpl extends CassandraConnectorFactory {
 
-  private static final String DEFAULT_CONNECTOR_KEY = "default";
-  private static Map<String, CassandraConnector> connectorByTenant = new HashMap<>();
+    private static final CassandraConnectorImpl INSTANCE = new CassandraConnectorImpl();
 
-  @Override
-  public CassandraConnector createInterface(CassandraContext context) {
-    String connectorKey = context.getTenant() == null ? DEFAULT_CONNECTOR_KEY : context.getTenant();
-    CassandraConnector connector = connectorByTenant.get(connectorKey);
-    return connector == null ? create(context.getTenant(), connectorKey) : connector;
-  }
+    @Override
+    public CassandraConnector createInterface() {
+        return INSTANCE;
+    }
 
-  private CassandraConnector create(String tenant, String connectorKey) {
-    CassandraConnector connector =
-        new CassandraConnectorImpl(CassandraSessionFactory.getSession(tenant));
-    connectorByTenant.put(connectorKey, connector);
-    return connector;
-  }
 }

@@ -18,8 +18,11 @@ package com.amdocs.zusammen.commons.db.impl.cassandra;
 
 import static java.util.concurrent.TimeUnit.SECONDS;
 
+import com.amdocs.zusammen.commons.log.ZusammenLogger;
+import com.amdocs.zusammen.commons.log.ZusammenLoggerFactory;
 import com.datastax.driver.core.Cluster;
 import com.datastax.driver.core.Cluster.Builder;
+import com.datastax.driver.core.Configuration;
 import com.datastax.driver.core.ConsistencyLevel;
 import com.datastax.driver.core.QueryOptions;
 import com.datastax.driver.core.RemoteEndpointAwareJdkSSLOptions;
@@ -28,40 +31,45 @@ import com.datastax.driver.core.Session;
 import com.datastax.driver.core.policies.DCAwareRoundRobinPolicy;
 import com.datastax.driver.core.policies.LoadBalancingPolicy;
 import com.datastax.driver.core.policies.TokenAwarePolicy;
+import com.datastax.driver.mapping.MappingManager;
 import java.io.FileInputStream;
-import java.io.IOException;
-import java.security.KeyManagementException;
 import java.security.KeyStore;
-import java.security.KeyStoreException;
-import java.security.NoSuchAlgorithmException;
 import java.security.SecureRandom;
-import java.security.UnrecoverableKeyException;
-import java.security.cert.CertificateException;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Optional;
 import javax.net.ssl.SSLContext;
 import javax.net.ssl.TrustManagerFactory;
 
-class CassandraSessionFactory {
+class CassandraConnectionFactory {
 
+    private static final ZusammenLogger LOGGER = ZusammenLoggerFactory.getLogger(CassandraConnectionFactory.class.getName());
     private static final long SHUTDOWN_TIMEOUT = 10;
     private static final String DEFAULT_KEYSPACE = CassandraConfig.getKeyspace();
     private static final String TENANT_KEYSPACE_PREFIX = DEFAULT_KEYSPACE + "_";
 
     private static Cluster cluster = initCluster();
-    private static Map<String, Session> sessionByKeyspace = new HashMap<>();
+    private static Map<String, MappingManager> mappingManagerByKeyspace = new HashMap<>();
+
+    static Configuration getConfiguration() {
+        return cluster.getConfiguration();
+    }
 
     static Session getSession(String tenant) {
-        String keyspace = tenant == null ? DEFAULT_KEYSPACE : TENANT_KEYSPACE_PREFIX + tenant;
-        Session session = sessionByKeyspace.get(keyspace);
-        return session == null ? initSession(keyspace) : session;
+        return getMappingManager(tenant).getSession();
+    }
+
+    static MappingManager getMappingManager(String tenant) {
+        String keyspace = getKeyspace(tenant);
+        return mappingManagerByKeyspace.computeIfAbsent(keyspace, k -> new MappingManager(initSession(keyspace)));
+    }
+
+    private static String getKeyspace(String tenant) {
+        return tenant == null ? DEFAULT_KEYSPACE : TENANT_KEYSPACE_PREFIX + tenant;
     }
 
     private static Session initSession(String keyspace) {
-        Session session = cluster.connect(keyspace);
-        sessionByKeyspace.put(keyspace, session);
-        return session;
+        return cluster.connect(keyspace);
     }
 
     private static Cluster initCluster() {
@@ -86,7 +94,7 @@ class CassandraSessionFactory {
                     new TokenAwarePolicy(DCAwareRoundRobinPolicy.builder().withLocalDc(dataCenter.get()).build());
             builder.withLoadBalancingPolicy(tokenAwarePolicy);
         }
-        if (nodes != null && nodes.length > 1) {
+        if (nodes.length > 1) {
             CassandraConfig.getConsistencyLevel().ifPresent(
                     s -> builder.withQueryOptions(new QueryOptions().setConsistencyLevel(ConsistencyLevel.valueOf(s))));
         }
@@ -110,12 +118,8 @@ class CassandraSessionFactory {
         Optional<String> truststorePassword = CassandraConfig.getTrustStorePassword();
 
         if (truststore.isPresent() && truststorePassword.isPresent()) {
-            SSLContext context;
-            try {
-                context = getSSLContext(truststore.get(), truststorePassword.get());
-            } catch (UnrecoverableKeyException | KeyManagementException | NoSuchAlgorithmException | KeyStoreException | CertificateException | IOException e) {
-                throw new RuntimeException(e);
-            }
+            SSLContext context = getSSLContext(truststore.get(), truststorePassword.get());
+
             String[] css = new String[] {"TLS_RSA_WITH_AES_128_CBC_SHA"};
             return Optional.of(
                     RemoteEndpointAwareJdkSSLOptions.builder().withSSLContext(context).withCipherSuites(css).build());
@@ -123,9 +127,7 @@ class CassandraSessionFactory {
         return Optional.empty();
     }
 
-    private static SSLContext getSSLContext(String truststorePath, String truststorePassword)
-            throws NoSuchAlgorithmException, KeyStoreException, CertificateException, IOException,
-                           UnrecoverableKeyException, KeyManagementException {
+    private static SSLContext getSSLContext(String truststorePath, String truststorePassword) {
         SSLContext ctx = null;
         try (FileInputStream tsf = new FileInputStream(truststorePath)) {
             ctx = SSLContext.getInstance("SSL");
@@ -135,14 +137,9 @@ class CassandraSessionFactory {
             TrustManagerFactory tmf = TrustManagerFactory.getInstance(TrustManagerFactory.getDefaultAlgorithm());
             tmf.init(ts);
 
-          /*  KeyStore ks = KeyStore.getInstance("JKS");
-            ks.load(ksf, keystorePassword.toCharArray());
-            KeyManagerFactory kmf = KeyManagerFactory.getInstance(KeyManagerFactory.getDefaultAlgorithm());
-            kmf.init(ks, keystorePassword.toCharArray());*/
-
             ctx.init(null, tmf.getTrustManagers(), new SecureRandom());
         } catch (Exception e) {
-            e.printStackTrace();
+            LOGGER.error("Error while getting SSL context", e);
         }
         return ctx;
     }

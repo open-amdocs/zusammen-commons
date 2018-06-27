@@ -16,8 +16,14 @@
 
 package com.amdocs.zusammen.commons.db.api.cassandra;
 
+import com.amdocs.zusammen.commons.db.api.cassandra.types.CassandraContext;
+import com.datastax.driver.core.Configuration;
 import com.datastax.driver.mapping.MappingManager;
 
 public interface CassandraConnector {
-  MappingManager getMappingManager();
+
+  MappingManager getMappingManager(CassandraContext context);
+
+  Configuration getConfiguration();
+
 }

@@ -16,17 +16,15 @@
 
 package com.amdocs.zusammen.commons.db.api.cassandra;
 
-import com.amdocs.zusammen.commons.db.api.cassandra.types.CassandraContext;
 import com.amdocs.zusammen.utils.facade.api.AbstractComponentFactory;
 import com.amdocs.zusammen.utils.facade.api.AbstractFactory;
 
 
-public abstract class CassandraConnectorFactory
-    extends AbstractComponentFactory<CassandraConnector> {
+public abstract class CassandraConnectorFactory extends AbstractComponentFactory<CassandraConnector> {
 
-  public static CassandraConnectorFactory getInstance() {
-    return AbstractFactory.getInstance(CassandraConnectorFactory.class);
-  }
+    public static CassandraConnectorFactory getInstance() {
+        return AbstractFactory.getInstance(CassandraConnectorFactory.class);
+    }
 
-  public abstract CassandraConnector createInterface(CassandraContext context);
+    public abstract CassandraConnector createInterface();
 }
