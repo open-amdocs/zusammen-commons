@@ -24,7 +24,7 @@
 
     <groupId>com.amdocs.zusammen</groupId>
     <artifactId>zusammen-commons</artifactId>
-    <version>0.0.1-SNAPSHOT</version>
+    <version>1.0.1</version>
 
     <packaging>pom</packaging>
     <url>http://maven.apache.org</url>
@@ -34,7 +34,7 @@
         <maven-source-plugin.version>3.0.1</maven-source-plugin.version>
         <maven-javadoc-plugin.version>2.10.4</maven-javadoc-plugin.version>
         <maven-gpg-plugin.version>1.6</maven-gpg-plugin.version>
-        <project.version>0.0.1-SNAPSHOT</project.version>
+        <project.version>1.0.1</project.version>
         <datastax.cassandra.version>3.4.0</datastax.cassandra.version>
     </properties>
     <profiles>
