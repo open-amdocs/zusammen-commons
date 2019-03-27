@@ -22,7 +22,8 @@ import java.util.List;
 import java.util.Optional;
 
 class CassandraConfig {
-
+  static private final Integer DEAFAULT_CASSANDRA_PORT = 9042;
+  static private final Long DEAFAULT_CASSANDRA_RECONNECT_TIMEOUT = 30000L;
   private static final String NODES = "cassandra.nodes";
   private static final String KEYSPACE = "cassandra.keyspace";
   private static final String USER = "cassandra.user";
@@ -34,6 +35,8 @@ class CassandraConfig {
   private static final String TRUST_STORE_PASSWORD = "cassandra.truststore.password";
   private static final String DATA_CENTER = "cassandra.datacenter";
   private static final String CONSISTENCY_LEVEL = "cassandra.consistency.level";
+  private static final String CASSANDRA_PORT_KEY = "cassandra.cassandraPort";
+  private static final String CASSANDRA_RECONNECT_TIMEOUT = "cassandra.reconnectTimeout";
 
   static String[] getNodes() {
     Object nodesObject = ConfigurationAccessor.getProperty(NODES);
@@ -64,13 +67,28 @@ class CassandraConfig {
   }
 
   static boolean isSsl() {
-
     return getBoolean(ConfigurationAccessor.getProperty(SSL));
   }
 
-  static Optional<Integer> getSslPort() {
-    Optional<String> sslPort = ConfigurationAccessor.getOptionalProperty(SSL_PORT);
-    return sslPort.filter(port->!port.equals("0") ).map(Integer::parseInt);
+  static Optional<Integer> getCassandraPort() {
+    Optional<String> cassandraPort = ConfigurationAccessor.getOptionalProperty(CASSANDRA_PORT_KEY);
+    if(!cassandraPort.isPresent()){
+      return Optional.of(DEAFAULT_CASSANDRA_PORT);
+    }
+    return Optional.of(Integer.valueOf(cassandraPort.get()));
+  }
+
+  /**
+   * Gets Cassandra reconnection timeout
+   *
+   * @return
+   */
+  public static Optional<Long> getReconnectTimeout() {
+    Optional<String> cassandraReconnectTimeout = ConfigurationAccessor.getOptionalProperty(CASSANDRA_RECONNECT_TIMEOUT);
+    if(!cassandraReconnectTimeout.isPresent()){
+      return Optional.of(DEAFAULT_CASSANDRA_RECONNECT_TIMEOUT);
+    }
+    return Optional.of(Long.parseLong(cassandraReconnectTimeout.get()));
   }
 
   static Optional<String> getTrustStore() {
