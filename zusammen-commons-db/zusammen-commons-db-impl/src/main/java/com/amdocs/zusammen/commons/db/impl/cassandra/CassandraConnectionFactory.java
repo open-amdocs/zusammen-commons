@@ -73,12 +73,13 @@ class CassandraConnectionFactory {
         }
         Builder builder = Cluster.builder();
 
-        CassandraConfig.getReconnectTimeout().ifPresent(rto -> builder
-                .withReconnectionPolicy(new ConstantReconnectionPolicy(rto))
+        CassandraConfig.getReconnectionDelay().ifPresent(delay -> builder
+                .withReconnectionPolicy(new ConstantReconnectionPolicy(delay))
                 .withRetryPolicy(DefaultRetryPolicy.INSTANCE));
+
         builder.addContactPoints(nodes);
 
-        CassandraConfig.getCassandraPort().ifPresent(builder::withPort);
+        CassandraConfig.getPort().ifPresent(builder::withPort);
 
         if (CassandraConfig.isSsl()) {
             getSSLOptions().ifPresent(builder::withSSL);
@@ -100,8 +101,9 @@ class CassandraConnectionFactory {
         }
 
         LOGGER.debug("Creating Cassandra cluster to hosts:{} port:{} with reconnect timeout:{} SSL is: {}",
-                nodes, CassandraConfig.getCassandraPort().get(), CassandraConfig.getReconnectTimeout().get(),
-                CassandraConfig.isSsl());
+                nodes, CassandraConfig.getPort().isPresent() ? CassandraConfig.getPort().get() : "default",
+                CassandraConfig.getReconnectionDelay().isPresent() ? CassandraConfig.getReconnectionDelay().get() :
+                        "default", CassandraConfig.isSsl());
 
         return builder.build();
     }
