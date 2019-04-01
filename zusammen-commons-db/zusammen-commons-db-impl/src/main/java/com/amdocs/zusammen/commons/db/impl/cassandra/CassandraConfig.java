@@ -69,10 +69,7 @@ class CassandraConfig {
 
   static Optional<Integer> getPort() {
     Optional<String> cassandraPort = ConfigurationAccessor.getOptionalProperty(PORT);
-    if(!cassandraPort.isPresent()){
-      return Optional.of(null);
-    }
-    return Optional.of(Integer.valueOf(cassandraPort.get()));
+    return cassandraPort.map(Integer::valueOf);
   }
 
   /**
@@ -82,10 +79,7 @@ class CassandraConfig {
    */
   public static Optional<Long> getReconnectionDelay() {
     Optional<String> cassandraReconnectTimeout = ConfigurationAccessor.getOptionalProperty(RECONNECT_DELAY);
-    if(!cassandraReconnectTimeout.isPresent()){
-      return Optional.empty();
-    }
-    return Optional.of(Long.parseLong(cassandraReconnectTimeout.get()));
+    return cassandraReconnectTimeout.map(Long::parseLong);
   }
 
   static Optional<String> getTrustStore() {
