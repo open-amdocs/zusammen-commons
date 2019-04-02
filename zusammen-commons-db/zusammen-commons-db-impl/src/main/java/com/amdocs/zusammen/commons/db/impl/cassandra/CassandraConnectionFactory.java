@@ -16,30 +16,23 @@
 
 package com.amdocs.zusammen.commons.db.impl.cassandra;
 
-import static java.util.concurrent.TimeUnit.SECONDS;
-
 import com.amdocs.zusammen.commons.log.ZusammenLogger;
 import com.amdocs.zusammen.commons.log.ZusammenLoggerFactory;
-import com.datastax.driver.core.Cluster;
+import com.datastax.driver.core.*;
 import com.datastax.driver.core.Cluster.Builder;
-import com.datastax.driver.core.Configuration;
-import com.datastax.driver.core.ConsistencyLevel;
-import com.datastax.driver.core.QueryOptions;
-import com.datastax.driver.core.RemoteEndpointAwareJdkSSLOptions;
-import com.datastax.driver.core.SSLOptions;
-import com.datastax.driver.core.Session;
-import com.datastax.driver.core.policies.DCAwareRoundRobinPolicy;
-import com.datastax.driver.core.policies.LoadBalancingPolicy;
-import com.datastax.driver.core.policies.TokenAwarePolicy;
+import com.datastax.driver.core.policies.*;
 import com.datastax.driver.mapping.MappingManager;
+
+import javax.net.ssl.SSLContext;
+import javax.net.ssl.TrustManagerFactory;
 import java.io.FileInputStream;
 import java.security.KeyStore;
 import java.security.SecureRandom;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Optional;
-import javax.net.ssl.SSLContext;
-import javax.net.ssl.TrustManagerFactory;
+
+import static java.util.concurrent.TimeUnit.SECONDS;
 
 class CassandraConnectionFactory {
 
@@ -74,16 +67,24 @@ class CassandraConnectionFactory {
 
     private static Cluster initCluster() {
         String[] nodes = CassandraConfig.getNodes();
+
         if (nodes.length == 0) {
             throw new IllegalStateException("no nodes specified");
         }
         Builder builder = Cluster.builder();
+
+        CassandraConfig.getReconnectionDelay().ifPresent(delay -> builder
+                .withReconnectionPolicy(new ConstantReconnectionPolicy(delay))
+                .withRetryPolicy(DefaultRetryPolicy.INSTANCE));
+
         builder.addContactPoints(nodes);
+
+        CassandraConfig.getPort().ifPresent(builder::withPort);
 
         if (CassandraConfig.isSsl()) {
             getSSLOptions().ifPresent(builder::withSSL);
         }
-        CassandraConfig.getSslPort().ifPresent(builder::withPort);
+
         if (CassandraConfig.isAuthenticate()) {
             builder.withCredentials(CassandraConfig.getUser(), CassandraConfig.getPassword());
         }
@@ -98,6 +99,12 @@ class CassandraConnectionFactory {
             CassandraConfig.getConsistencyLevel().ifPresent(
                     s -> builder.withQueryOptions(new QueryOptions().setConsistencyLevel(ConsistencyLevel.valueOf(s))));
         }
+
+        LOGGER.debug("Creating Cassandra cluster to hosts:{} port:{} with reconnect timeout:{} SSL is: {}",
+                nodes, CassandraConfig.getPort().isPresent() ? CassandraConfig.getPort().get() : "default",
+                CassandraConfig.getReconnectionDelay().isPresent() ? CassandraConfig.getReconnectionDelay().get() :
+                        "default", CassandraConfig.isSsl());
+
         return builder.build();
     }
 

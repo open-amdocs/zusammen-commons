@@ -22,18 +22,18 @@ import java.util.List;
 import java.util.Optional;
 
 class CassandraConfig {
-
   private static final String NODES = "cassandra.nodes";
   private static final String KEYSPACE = "cassandra.keyspace";
   private static final String USER = "cassandra.user";
   private static final String PASSWORD = "cassandra.password";
   private static final String AUTHENTICATE = "cassandra.authenticate";
   private static final String SSL = "cassandra.ssl";
-  private static final String SSL_PORT = "cassandra.ssl.port";
   private static final String TRUST_STORE = "cassandra.truststore";
   private static final String TRUST_STORE_PASSWORD = "cassandra.truststore.password";
   private static final String DATA_CENTER = "cassandra.datacenter";
   private static final String CONSISTENCY_LEVEL = "cassandra.consistency.level";
+  private static final String PORT = "cassandra.port";
+  private static final String RECONNECT_DELAY = "cassandra.reconnection.delay";
 
   static String[] getNodes() {
     Object nodesObject = ConfigurationAccessor.getProperty(NODES);
@@ -64,13 +64,22 @@ class CassandraConfig {
   }
 
   static boolean isSsl() {
-
     return getBoolean(ConfigurationAccessor.getProperty(SSL));
   }
 
-  static Optional<Integer> getSslPort() {
-    Optional<String> sslPort = ConfigurationAccessor.getOptionalProperty(SSL_PORT);
-    return sslPort.filter(port->!port.equals("0") ).map(Integer::parseInt);
+  static Optional<Integer> getPort() {
+    Optional<String> cassandraPort = ConfigurationAccessor.getOptionalProperty(PORT);
+    return cassandraPort.map(Integer::valueOf);
+  }
+
+  /**
+   * Gets Cassandra reconnection timeout
+   *
+   * @return
+   */
+  public static Optional<Long> getReconnectionDelay() {
+    Optional<String> cassandraReconnectTimeout = ConfigurationAccessor.getOptionalProperty(RECONNECT_DELAY);
+    return cassandraReconnectTimeout.map(Long::parseLong);
   }
 
   static Optional<String> getTrustStore() {
