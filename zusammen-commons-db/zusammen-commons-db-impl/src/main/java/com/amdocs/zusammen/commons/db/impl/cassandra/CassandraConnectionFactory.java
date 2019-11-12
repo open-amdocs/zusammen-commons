@@ -72,6 +72,7 @@ class CassandraConnectionFactory {
             throw new IllegalStateException("no nodes specified");
         }
         Builder builder = Cluster.builder();
+        builder.withoutJMXReporting();
 
         CassandraConfig.getReconnectionDelay().ifPresent(delay -> builder
                 .withReconnectionPolicy(new ConstantReconnectionPolicy(delay))

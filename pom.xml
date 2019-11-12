@@ -35,7 +35,7 @@
         <maven-javadoc-plugin.version>2.10.4</maven-javadoc-plugin.version>
         <maven-gpg-plugin.version>1.6</maven-gpg-plugin.version>
         <project.version>0.0.1-SNAPSHOT</project.version>
-        <datastax.cassandra.version>3.4.0</datastax.cassandra.version>
+        <datastax.cassandra.version>3.6.0</datastax.cassandra.version>
     </properties>
     <profiles>
         <profile>
